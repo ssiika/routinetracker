@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
-    "server": "nodemon server/server.js"
+    "start": "ts-node server/app.ts",
+    "server": "nodemon server/app.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,9 @@
     "mongoose": "^7.2.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.2.5",
+    "nodemon": "^2.0.22",
+    "typescript": "^5.1.3"
   }
 }
