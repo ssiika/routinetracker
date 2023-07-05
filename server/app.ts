@@ -11,7 +11,9 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/api/users', require('./routes/userRoutes'))
+app.use('/api/timeslots', require('./routes/timeslotRoutes'))
+app.use('/api/activities', require('./routes/activityRoutes'))
 
 app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+  console.log(`[server]: Server is running at http://localhost:${port}`);
 });

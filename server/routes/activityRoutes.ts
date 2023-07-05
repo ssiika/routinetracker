@@ -5,5 +5,5 @@ const router = express.Router()
 module.exports = router
 
 router.get('/', (req, res) => {
-    res.status(200).json({message: 'Get user'})
+    res.status(200).json({message: 'Get activity'})
 })
