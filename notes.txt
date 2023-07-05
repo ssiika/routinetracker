@@ -1,0 +1,20 @@
+// Column graph of day activity
+
+
+Schema :
+
+user: {
+    uesrname,
+    password
+}
+timeslot: {
+    userid,
+    activity: foreign key
+    day: number (e.g. Wed 3),
+    time: (in minutes)
+}
+activity: [
+    day: date,
+    expected: number,
+    actual: number,
+]
