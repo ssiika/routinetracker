@@ -1,9 +1,18 @@
 export {};
-const express = require('express')
+var express = require('express')
 const router = express.Router()
 
-module.exports = router
+const {
+    addActivity,
+    getActivities,
+    updateActivity,
+    deleteActivity,
+} = require('../controllers/ActivityController')
 
-router.get('/', (req, res) => {
-    res.status(200).json({message: 'Get activity'})
-})
+router.route('/:id')
+    .post(addActivity)
+    .get(getActivities)
+    .put(updateActivity)
+    .delete(deleteActivity)
+    
+module.exports = router

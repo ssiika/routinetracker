@@ -1,9 +1,18 @@
 export {};
-const express = require('express')
+var express = require('express')
 const router = express.Router()
 
-module.exports = router
+const {
+    addTimeslot,
+    getTimeslots,
+    updateTimeslot,
+    deleteTimeslot,
+} = require('../controllers/timeslotController')
 
-router.get('/', (req, res) => {
-    res.status(200).json({message: 'Get timeslot'})
-})
+router.route('/:id')
+    .post(addTimeslot)
+    .get(getTimeslots)
+    .put(updateTimeslot)
+    .delete(deleteTimeslot)
+
+module.exports = router

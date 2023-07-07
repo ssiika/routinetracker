@@ -1,9 +1,18 @@
 export {};
-const express = require('express')
+var express = require('express')
 const router = express.Router()
 
-module.exports = router
+const {
+    addUser,
+    getUsers,
+    updateUser,
+    deleteUser,
+} = require('../controllers/UserController')
 
-router.get('/', (req, res) => {
-    res.status(200).json({message: 'Get user'})
-})
+router.route('/:id')
+    .post(addUser)
+    .get(getUsers)
+    .put(updateUser)
+    .delete(deleteUser)
+
+module.exports = router
