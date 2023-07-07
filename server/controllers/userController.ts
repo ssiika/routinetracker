@@ -1,7 +1,11 @@
 import express, {Request, Response} from 'express';
 
 const addUser = (req: Request, res: Response) => {
-        res.status(200).json({message: `Set user ${req.params.id}`})
+    if (!req.body.message) {
+        res.status(400) 
+        throw new Error('Please provide body message')
+    }
+        res.status(200).json(req.body.message)
 }
 
 const getUsers = (req: Request, res: Response) => {
