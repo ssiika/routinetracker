@@ -1,20 +1,21 @@
+const asyncHandler = require('express-async-handler');
 import express, {Request, Response} from 'express';
 
-const addTimeslot = (req: Request, res: Response) => {
+const addTimeslot = asyncHandler(async (req: Request, res: Response) => {
         res.status(200).json({message: `Set timeslot ${req.params.id}`})
-}
+})
 
-const getTimeslots = (req: Request, res: Response) => {
+const getTimeslots = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({message: `Get timeslot ${req.params.id}`})
-}
+})
 
-const updateTimeslot = (req: Request, res: Response) => {
+const updateTimeslot = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({message: `Update timeslot ${req.params.id}`})
-}
+})
 
-const deleteTimeslot = (req: Request, res: Response) => {
+const deleteTimeslot = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({message: `Delete timeslot ${req.params.id}`})
-}
+})
 
 module.exports = {
     addTimeslot,
