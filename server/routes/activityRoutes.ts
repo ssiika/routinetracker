@@ -1,4 +1,3 @@
-export {};
 var express = require('express')
 const router = express.Router()
 
@@ -7,7 +6,7 @@ const {
     getActivities,
     updateActivity,
     deleteActivity,
-} = require('../controllers/ActivityController')
+} = require('../controllers/activityController')
 
 router.route('/:id')
     .post(addActivity)
@@ -16,3 +15,4 @@ router.route('/:id')
     .delete(deleteActivity)
     
 module.exports = router
+export {};

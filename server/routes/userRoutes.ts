@@ -1,4 +1,3 @@
-export {};
 var express = require('express')
 const router = express.Router()
 
@@ -7,7 +6,7 @@ const {
     getUsers,
     updateUser,
     deleteUser,
-} = require('../controllers/UserController')
+} = require('../controllers/userController')
 
 router.route('/:id')
     .post(addUser)
@@ -16,3 +15,4 @@ router.route('/:id')
     .delete(deleteUser)
 
 module.exports = router
+export {};

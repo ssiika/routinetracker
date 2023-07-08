@@ -1,5 +1,6 @@
 // Column graph of day activity
 
+// mongodb un + pw : routinetracker
 
 Schema :
 
@@ -8,8 +9,6 @@ user: {
     password
 }
 timeslot: {
-    userid,
-    activity: foreign key
     day: number (e.g. Wed 3),
     time: (in minutes)
 }
