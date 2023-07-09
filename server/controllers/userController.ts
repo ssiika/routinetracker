@@ -1,12 +1,40 @@
 const asyncHandler = require('express-async-handler');
+const User = require('../models/userModel');
 import express, {Request, Response} from 'express';
 
 const addUser = asyncHandler(async (req: Request, res: Response) => {
-    if (!req.body.message) {
-        res.status(400) 
-        throw new Error('Please provide body message')
+    const { username, password } = req.body;
+
+    if (!username || !password ) {
+        res.status(400)
+        throw new Error('Please provide a username and password');
     }
-        res.status(200).json(req.body.message)
+
+    const userAlreadyExists = await User.findOne({username});
+
+    if (userAlreadyExists) {
+        res.status(400)
+        throw new Error('User already exists')
+    }
+
+    // Temporary pw
+    const hashedPw = password
+
+    /* Hash password 
+    const salt = await bcrypt.genSalt(10);
+    const hashedPw = await bcrypt.hash(password, salt); */
+
+    const user = await User.create({
+        username,
+        password: hashedPw
+    })
+
+    if (!user) {
+        res.status(400)
+        throw new Error('Invalid user data')
+    }
+
+    res.status(200).json(user)
 })
 
 const getUsers = asyncHandler(async (req: Request, res: Response) => {
