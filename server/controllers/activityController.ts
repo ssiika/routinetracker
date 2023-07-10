@@ -36,10 +36,14 @@ const addActivity = asyncHandler(async (req: Request, res: Response) => {
 
 const getActivities = asyncHandler(async (req: Request, res: Response) => {
     // Get all activities of a user. Requires user id
-    res.status(200).json({message: `Get activity ${req.params.id}`})
+
+    const activities = await Activity.find({"user": req.params.id}) as Array<ActivityFormat>
+
+    res.status(200).json(activities)
 })
 
 const updateActivity = asyncHandler(async (req: Request, res: Response) => {
+    // Route to change name of id
     res.status(200).json({message: `Update activity ${req.params.id}`})
 })
 
