@@ -4,10 +4,6 @@ const Schema = mongoose.Schema;
 
 const activity = new Schema(
     {
-        id: {
-            type: String,
-            required: [true, 'Please provide id']
-        },
         user: {
             type: String,
             required: [true, 'Please provide user']

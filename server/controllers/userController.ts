@@ -37,21 +37,12 @@ const addUser = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json(user)
 })
 
-const getUsers = asyncHandler(async (req: Request, res: Response) => {
+const getUser = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json({message: `Get user ${req.params.id}`})
 })
 
-const updateUser = asyncHandler(async (req: Request, res: Response) => {
-    res.status(200).json({message: `Update user ${req.params.id}`})
-})
-
-const deleteUser = asyncHandler(async (req: Request, res: Response) => {
-    res.status(200).json({message: `Delete user ${req.params.id}`})
-})
 
 module.exports = {
     addUser,
-    getUsers,
-    updateUser,
-    deleteUser
+    getUser,
 }
