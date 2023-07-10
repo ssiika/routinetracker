@@ -42,13 +42,11 @@ const getActivities = asyncHandler(async (req: Request, res: Response) => {
     res.status(200).json(activities)
 })
 
-const updateActivity = asyncHandler(async (req: Request, res: Response) => {
-    // Route to change name of id
-    res.status(200).json({message: `Update activity ${req.params.id}`})
-})
 
 const deleteActivity = asyncHandler(async (req: Request, res: Response) => {
-    res.status(200).json({message: `Delete activity ${req.params.id}`})
+    const deletedResponse = await Activity.deleteOne({"_id": req.params.id}) as Array<ActivityFormat>
+
+    res.status(200).json(deletedResponse)
 })
 
 /*      user: {
@@ -80,6 +78,5 @@ const deleteActivity = asyncHandler(async (req: Request, res: Response) => {
 module.exports = {
     addActivity,
     getActivities,
-    updateActivity,
     deleteActivity
 }
