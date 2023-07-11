@@ -44,36 +44,11 @@ const getActivities = asyncHandler(async (req: Request, res: Response) => {
 
 
 const deleteActivity = asyncHandler(async (req: Request, res: Response) => {
-    const deletedResponse = await Activity.deleteOne({"_id": req.params.id}) as Array<ActivityFormat>
+    const deletedResponse = await Activity.deleteOne({"_id": req.params.id})
 
     res.status(200).json(deletedResponse)
 })
 
-/*      user: {
-            type: String,
-            required: [true, 'Please provide user']
-        },
-        name: {
-            type: String,
-            required: [true, 'Please provide name']
-        },
-        timeslots: [{
-            // monday = 0, tuesday = 1 etc.
-            day: {
-                type: Number,
-                required: [true, 'Please provide timeslot day']
-            },
-            starttime: {
-                type: Number,
-                required: [true, 'Please provide timeslot start time']
-            },
-            duration: {
-                type: Number,
-                required: [true, 'Please provide timeslot duration']
-            }
-        }
-        ]
-        */
 
 module.exports = {
     addActivity,
