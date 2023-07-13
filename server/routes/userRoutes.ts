@@ -3,14 +3,20 @@ const router = express.Router()
 
 const {
     addUser,
+    loginUser,
     getUser,
-    updateUser,
-    deleteUser,
 } = require('../controllers/userController')
+const { authenticate } = require('../middleware/tokenAuth')
+
+router.route('/login')
+    .post(loginUser)
+
+router.route('/')
+    .post(addUser)
 
 router.route('/:id')
-    .post(addUser)
-    .get(getUser)
+    .get(authenticate, getUser)
+
 
 module.exports = router
 export {};

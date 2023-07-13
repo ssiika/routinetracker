@@ -7,8 +7,9 @@ const {
     deleteActivity,
 } = require('../controllers/activityController')
 
+router.route('/').post(addActivity)
+
 router.route('/:id')
-    .post(addActivity)
     .get(getActivities)
     .delete(deleteActivity)
     

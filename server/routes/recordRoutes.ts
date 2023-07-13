@@ -8,8 +8,9 @@ const {
     deleteRecord,
 } = require('../controllers/recordController')
 
+router.route('/').post(addRecord)
+
 router.route('/:id')
-    .post(addRecord)
     .get(getRecords)
     .put(updateRecord)
     .delete(deleteRecord)
