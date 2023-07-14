@@ -6,12 +6,14 @@ const {
     getActivities,
     deleteActivity,
 } = require('../controllers/activityController')
+const { authenticate } = require('../middleware/tokenAuth')
 
-router.route('/').post(addActivity)
+router.route('/')
+    .get(authenticate, getActivities)
+    .post(authenticate, addActivity)
 
 router.route('/:id')
-    .get(getActivities)
-    .delete(deleteActivity)
+    .delete(authenticate, deleteActivity)
     
 module.exports = router
 export {};

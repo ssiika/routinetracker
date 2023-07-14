@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const record = new Schema(
     {
+        user: {
+            type: String,
+            required: [true, 'Please provide user']
+        },
         activity_id: {
             type: String,
             required: [true, 'Please provide activity id']

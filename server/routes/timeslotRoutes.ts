@@ -6,11 +6,12 @@ const {
     getTimeslots,
     deleteTimeslot,
 } = require('../controllers/timeslotController')
+const { authenticate } = require('../middleware/tokenAuth')
 
 router.route('/:id')
-    .post(addTimeslot)
-    .get(getTimeslots)
-    .delete(deleteTimeslot)
+    .post(authenticate, addTimeslot)
+    .get(authenticate, getTimeslots)
+    .delete(authenticate, deleteTimeslot)
 
 module.exports = router
 export {};

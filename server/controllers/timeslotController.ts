@@ -8,7 +8,11 @@ interface TimeslotFormat {
     duration: Number
 }
 
-const addTimeslot = asyncHandler(async (req: Request, res: Response) => {
+interface RequestWUser extends Request {
+    user: any
+  }
+
+const addTimeslot = asyncHandler(async (req: RequestWUser, res: Response) => {
     const { day, starttime, duration } = req.body
         
     if (day === undefined || starttime === undefined || duration === undefined) {
@@ -22,24 +26,29 @@ const addTimeslot = asyncHandler(async (req: Request, res: Response) => {
         duration
     }
 
-    const timeslotUpdate = await Activity.updateOne({_id: req.params.id}, {$push: {"timeslots": timeslotObject }});
+    const timeslotUpdate = await Activity.updateOne({_id: req.params.id, user: req.user._id}, {$push: {"timeslots": timeslotObject }}) as TimeslotFormat;
 
     res.status(200).json(timeslotUpdate)
 })
 
-const getTimeslots = asyncHandler(async (req: Request, res: Response) => {
-    const activityObject = await Activity.findOne({_id: req.params.id})
+const getTimeslots = asyncHandler(async (req: RequestWUser, res: Response) => {
+    const activityObject = await Activity.findOne({_id: req.params.id, user: req.user._id})
+
+    if (!activityObject) {
+        res.status(400)
+        throw new Error('Activity not found')
+    }
 
     res.status(200).json(activityObject.timeslots)
 })
 
 
-const deleteTimeslot = asyncHandler(async (req: Request, res: Response) => {
+const deleteTimeslot = asyncHandler(async (req: RequestWUser, res: Response) => {
     // id should have format `${activityid}-${timeslotid}`
 
     const [activityid, timeslotid] = req.params.id.split('-')
 
-    const deletedResponse = await Activity.updateOne({"_id": activityid}, {$pull: {"timeslots": {_id: timeslotid}}})
+    const deletedResponse = await Activity.updateOne({"_id": activityid, "user": req.user._id}, {$pull: {"timeslots": {_id: timeslotid}}})
 
     res.status(200).json(deletedResponse)
 })
