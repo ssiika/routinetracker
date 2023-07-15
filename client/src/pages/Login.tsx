@@ -4,6 +4,8 @@ import {FaSignInAlt} from 'react-icons/fa';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {login, reset} from '../features/auth/authSlice';
+import type { RootState } from '../app/store'
+import { useAppDispatch } from '../app/hooks';
 import Spinner from '../components/Spinner'
 
 
@@ -16,10 +18,10 @@ function Login() {
   const { username, password } = formData;
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const {user, isLoading, isSuccess, message} = useSelector(
-    (state) => state.auth
+    (state: RootState) => state.auth
   )
 
   useEffect(() => {

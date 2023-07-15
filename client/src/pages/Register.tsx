@@ -3,7 +3,9 @@ import { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {FaUser} from 'react-icons/fa';
-import {register, reset} from '../features/authentication/authSlice';
+import {register, reset} from '../features/auth/authSlice';
+import type { RootState } from '../app/store'
+import { useAppDispatch } from '../app/hooks';
 import Spinner from '../components/Spinner'
 
 function Register() {
@@ -18,10 +20,10 @@ function Register() {
   const { username, password, pwConfirm } = formData;
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const {user, isLoading, isSuccess, message} = useSelector(
-    (state) => state.auth
+    (state: RootState) => state.auth
   )
   
   useEffect(() => {

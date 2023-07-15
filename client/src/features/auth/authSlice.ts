@@ -13,8 +13,13 @@ const initialState = {
     message: '',
 }
 
+interface User {
+    username: string,
+    password: string
+}
+
 // Register user
-export const register = createAsyncThunk('auth/register', async (user, thunkAPI) => {
+export const register = createAsyncThunk('auth/register', async (user: User, thunkAPI) => {
     try {
         return await authService.register(user)
     } catch (error) {
@@ -28,7 +33,7 @@ export const register = createAsyncThunk('auth/register', async (user, thunkAPI)
 })
 
 // Login user
-export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+export const login = createAsyncThunk('auth/login', async (user: User, thunkAPI) => {
     try {
         return await authService.login(user)
     } catch (error) {
