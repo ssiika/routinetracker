@@ -8,16 +8,19 @@ function Header() {
         <div className="logo">
             <Link to='/'>Routine Tracker</Link>
         </div>
-        <li>
-            <Link to='/login'>
-                Login
-            </Link>
-        </li>
-        <li className='registerbox'>
-            <Link to='/register'>
-                <FaUser /> Register
-            </Link>
-        </li>
+        <ul>
+            <li>
+                <Link to='/login'>
+                        Login
+                </Link>
+            </li>
+            <li className='registerbox'>
+                <Link to='/register'>
+                        <FaUser /> Register
+                </Link>
+            </li>
+        </ul>
+        
     </header>
     
   )
