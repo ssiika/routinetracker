@@ -11,7 +11,7 @@ const register = async (userData: UserData) => {
     const response = await axios.post(API_URL, userData)
         .catch(function (error) {
             if (error.response.data) {
-                throw new Error(error.response.data);
+                throw new Error(error.response.data.message);
             }
     })
 
@@ -28,7 +28,7 @@ const login = async (userData: UserData) => {
     const response = await axios.post(API_URL + 'login', userData)
         .catch(function (error) {
             if (error.response.data) {
-                throw new Error(error.response.data);
+                throw new Error(error.response.data.message);
             }
         })
     if (response && response.data) {

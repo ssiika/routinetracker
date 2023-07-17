@@ -18,6 +18,14 @@ code {
   display: grid;
 }
 
+.sidebar {
+  height: 500px;
+  width: 100px;
+  position: absolute;
+  margin-top: 150px;
+  border: 1px solid black;
+  background-color: white;
+}
 .form,
 .content {
   width: 70%;

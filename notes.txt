@@ -1,19 +1,11 @@
-// Column graph of day activity
+Website pages 
 
-// mongodb un + pw : routinetracker
+    Log 
+        Allows user to log time spent
+        
+    Schedule
+        Shows weekly view of timeslots
+        Allows user to add/remove activities and timeslots
 
-Schema :
-
-user: {
-    uesrname,
-    password
-}
-timeslot: {
-    day: number (e.g. Wed 3),
-    time: (in minutes)
-}
-activity: [
-    day: date,
-    expected: number,
-    actual: number,
-]
+    History
+        shows actual input vs expected in graph
