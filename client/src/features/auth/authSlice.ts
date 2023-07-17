@@ -23,11 +23,13 @@ export const register = createAsyncThunk('auth/register', async (user: User, thu
     try {
         return await authService.register(user)
     } catch (error) {
-        const message = (error.response && 
-            error.response.data && 
-            error.response.data.message) ||
-            error.message || 
-            error.toString();
+        let message = 'unknown error message'
+        if (error instanceof Error) {
+                message = error.message || 
+                error.toString();
+                return thunkAPI.rejectWithValue(message)
+        }
+        
         return thunkAPI.rejectWithValue(message);
     }
 })
@@ -37,11 +39,13 @@ export const login = createAsyncThunk('auth/login', async (user: User, thunkAPI)
     try {
         return await authService.login(user)
     } catch (error) {
-        const message = (error.response && 
-            error.response.data && 
-            error.response.data.message) ||
-            error.message || 
-            error.toString();
+        let message = 'unknown error message'
+        if (error instanceof Error) {
+                message = error.message || 
+                error.toString();
+                return thunkAPI.rejectWithValue(message)
+        }
+        
         return thunkAPI.rejectWithValue(message);
     }
 })

@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import { useState, useEffect } from 'react';
 import {FaSignInAlt} from 'react-icons/fa';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
+import type { RootState } from '../app/store';
 import {login, reset} from '../features/auth/authSlice';
-import type { RootState } from '../app/store'
 import { useAppDispatch } from '../app/hooks';
-import Spinner from '../components/Spinner'
+import Spinner  from '../components/Spinner';
 
 
 function Login() {
@@ -33,14 +33,15 @@ function Login() {
 
   }, [user, isSuccess, navigate, dispatch])
 
-  const onChange = (e) => {
+  const onChange = (e: SyntheticEvent) => {
+    const target = e.target as HTMLInputElement
     setFormData((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [target.name]: target.value,
     }))
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
     const userData = {
@@ -94,3 +95,5 @@ function Login() {
     </div>
   )
 }
+
+export default Login

@@ -1,6 +1,5 @@
 const asyncHandler = require('express-async-handler');
 const Activity = require('../models/activityModel');
-const User = require('../models/userModel')
 import express, {Request, Response} from 'express';
 
 interface ActivityFormat {

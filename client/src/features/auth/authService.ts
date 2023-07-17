@@ -2,8 +2,12 @@ import axios from 'axios';
 
 const API_URL = '/api/users/';
 
+interface UserData {
+    username: string,
+    password: string
+}
 // Register user
-const register = async (userData) => {
+const register = async (userData: UserData) => {
     const response = await axios.post(API_URL, userData)
         .catch(function (error) {
             if (error.response.data) {
@@ -20,7 +24,7 @@ const register = async (userData) => {
 }
 
 // Login user
-const login = async (userData) => {
+const login = async (userData: UserData) => {
     const response = await axios.post(API_URL + 'login', userData)
         .catch(function (error) {
             if (error.response.data) {

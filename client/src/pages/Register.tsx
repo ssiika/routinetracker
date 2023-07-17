@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import { useState, useEffect } from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {FaUser} from 'react-icons/fa';
-import {register, reset} from '../features/auth/authSlice';
-import type { RootState } from '../app/store'
+import type { RootState } from '../app/store.js';
+import  {register, reset} from '../features/auth/authSlice';
 import { useAppDispatch } from '../app/hooks';
-import Spinner from '../components/Spinner'
+import Spinner from '../components/Spinner';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -36,14 +36,15 @@ function Register() {
 
   }, [user, isSuccess, navigate, dispatch])
 
-  const onChange = (e) => {
+  const onChange = (e: SyntheticEvent) => {
+    const target = e.target as HTMLInputElement
     setFormData((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [target.name]: target.value,
     }))
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     if (password !== pwConfirm) {
       setLocalError('Passwords do not match')
