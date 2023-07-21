@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from 'react'
 import { useState, useEffect } from 'react';
 import {FaSignInAlt} from 'react-icons/fa';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import type { RootState } from '../app/store';
 import {login, reset} from '../features/auth/authSlice';

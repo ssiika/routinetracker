@@ -16,10 +16,7 @@ const record = new Schema(
             type: Date,
             required: [true, 'Please provide a date']
         },
-        expected: {
-            type: Number
-        },
-        actual: {
+        time: {
             type: Number
         }
 })

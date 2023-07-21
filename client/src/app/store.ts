@@ -1,9 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from '../features/auth/authSlice'
+import recordReducer from '../features/records/recordSlice'
+import activityReducer from '../features/activities/activitySlice'
+
 
 export const store = configureStore({
   reducer: {
-    auth: authReducer
+    auth: authReducer,
+    records: recordReducer,
+    activities: activityReducer
   },
 });
 

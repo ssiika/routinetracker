@@ -15,21 +15,18 @@ interface RequestWUser extends Request {
   }
 
 const addRecord = asyncHandler(async (req: RequestWUser, res: Response) => {
-    const { activity_id, day, expected} = req.body;
+    const { activity_id, day, time} = req.body;
 
-    if (!activity_id || !day || !expected) {
+    if (!activity_id || !day || !time) {
         res.status(400)
-        throw new Error('Request must have activity id, day and expected parameters')
+        throw new Error('Request must have activity id, day and time parameters')
     }
-
-    const actual = req.body.actual ? req.body.actual : 0
 
     const record = await Record.create({
         user: req.user._id,
         activity_id, 
         day, 
-        expected, 
-        actual
+        time
     }) as RecordFormat
     
     res.status(200).json(record)
@@ -38,7 +35,7 @@ const addRecord = asyncHandler(async (req: RequestWUser, res: Response) => {
 const getRecords = asyncHandler(async (req: RequestWUser, res: Response) => {
     // Get all records of a user. Requires activity id
 
-    const records = await Record.find({"activity_id": req.params.id, "user": req.user._id}) as Array<RecordFormat>
+    const records = await Record.find({"user": req.user._id}) as Array<RecordFormat>
 
     res.status(200).json(records)
 })

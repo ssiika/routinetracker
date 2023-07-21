@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import recordService from './recordService'
-import { BaseThunkAPI } from '@reduxjs/toolkit/dist/createAsyncThunk'
 import { RootState } from '../../app/store'
 
 interface state {
@@ -35,11 +34,26 @@ async (recordData, thunkAPI) => {
     }
 })
 
+export const getRecords = createAsyncThunk<object[], undefined, { state: RootState }>('record/get',
+async (_, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token
+        return await recordService.getRecords(token);
+    } catch (error) {
+        let message = 'unknown error message'
+        if (error instanceof Error) {
+                message = error.message || 
+                error.toString();
+                return thunkAPI.rejectWithValue(message)
+        }
+    }
+})
+
 export const recordSlice = createSlice({
     name: 'record', 
     initialState, 
     reducers: {
-        reset: (state) => initialState
+        recordReset: (state) => initialState
     },
     extraReducers: (builder) => {
         builder
@@ -57,5 +71,22 @@ export const recordSlice = createSlice({
                 state.isError = true;
                 state.message = action.payload as string;
             })
+            .addCase(getRecords.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getRecords.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.message = '';
+                state.userRecordList = action.payload;
+            })
+            .addCase(getRecords.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload as string;
+            })
     }
 })
+
+export const {recordReset} = recordSlice.actions;
+export default recordSlice.reducer

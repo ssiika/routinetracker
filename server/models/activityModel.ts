@@ -27,8 +27,11 @@ const activity = new Schema(
                 required: [true, 'Please provide timeslot duration']
             }
         }
-        ]
-})
+        ]},
+        {
+            timestamps: true
+        }
+)
 
 module.exports = mongoose.model("activity", activity);
 export {};

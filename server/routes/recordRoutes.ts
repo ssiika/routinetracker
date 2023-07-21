@@ -9,10 +9,11 @@ const {
 } = require('../controllers/recordController')
 const { authenticate } = require('../middleware/tokenAuth')
 
-router.route('/').post(authenticate, addRecord)
+router.route('/')
+    .post(authenticate, addRecord)
+    .get(authenticate, getRecords)
 
 router.route('/:id')
-    .get(authenticate, getRecords)
     .put(authenticate, updateRecord)
     .delete(authenticate, deleteRecord)
     
