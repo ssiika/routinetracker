@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import authService from './authService';
+import { User } from '../../types';
 
 // Get user from localStorage
 
@@ -11,11 +12,6 @@ const initialState = {
     isSuccess: false,
     isLoading: false,
     message: '',
-}
-
-interface User {
-    username: string,
-    password: string
 }
 
 // Register user

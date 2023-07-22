@@ -1,17 +1,9 @@
 import { createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import recordService from './recordService'
 import { RootState } from '../../app/store'
+import { Record, recordState } from '../../types'
 
-interface state {
-    userRecordList: object[],
-    isError: boolean,
-    isSuccess: boolean,
-    isLoading: boolean,
-    message: string
-    
-}
-
-const initialState: state = {
+const initialState: recordState = {
     userRecordList: [],
     isError: false,
     isSuccess: false,
@@ -19,7 +11,7 @@ const initialState: state = {
     message: ''
 }
 
-export const createRecord = createAsyncThunk<object[], object, { state: RootState }>('record/create',
+export const createRecord = createAsyncThunk<Record, object, { state: RootState }>('record/create',
 async (recordData, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
@@ -34,7 +26,7 @@ async (recordData, thunkAPI) => {
     }
 })
 
-export const getRecords = createAsyncThunk<object[], undefined, { state: RootState }>('record/get',
+export const getRecords = createAsyncThunk<Record[], undefined, { state: RootState }>('record/get',
 async (_, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token

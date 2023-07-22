@@ -1,17 +1,9 @@
 import { createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import activityService from './activityService'
 import { RootState } from '../../app/store'
+import { Activity, activityState } from '../../types'
 
-interface state {
-    userActivityList: object[],
-    isError: boolean,
-    isSuccess: boolean,
-    isLoading: boolean,
-    message: string
-    
-}
-
-const initialState: state = {
+const initialState: activityState = {
     userActivityList: [],
     isError: false,
     isSuccess: false,
@@ -19,7 +11,7 @@ const initialState: state = {
     message: ''
 }
 
-export const createActivity = createAsyncThunk<object[], object, { state: RootState }>('activity/create',
+export const createActivity = createAsyncThunk<Activity, object, { state: RootState }>('activity/create',
 async (activityData, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
@@ -34,7 +26,7 @@ async (activityData, thunkAPI) => {
     }
 })
 
-export const getActivities = createAsyncThunk<object[], undefined, { state: RootState }>('activity/get',
+export const getActivities = createAsyncThunk<Activity[], undefined, { state: RootState }>('activity/get',
 async (_, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
