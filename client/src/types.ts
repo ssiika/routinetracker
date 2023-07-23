@@ -19,10 +19,8 @@ export interface Activity {
     _id: string,
     user: string,
     name: string,
-    timeslots: object[],
-    createdAt: string,
-    updatedAt: string
-
+    start: Date,
+    timeslots: Timeslot[]
 }
 
 export interface activityState {
@@ -32,6 +30,13 @@ export interface activityState {
     isLoading: boolean,
     message: string
 }
+
+export interface Timeslot {
+    day: Number,
+    starttime: Number,
+    duration: Number
+}
+
 
 export interface User {
     username: string,

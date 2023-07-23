@@ -3,10 +3,7 @@ const User = require('../models/userModel');
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 import express, {Request, Response} from 'express';
-
-interface RequestWUser extends Request {
-    user: any
-  }
+import { RequestWUser } from '../types';
 
 const addUser = asyncHandler(async (req: Request, res: Response) => {
     const { username, password } = req.body;

@@ -19,7 +19,8 @@ const record = new Schema(
         time: {
             type: Number
         }
-})
+    }
+)
 
 module.exports = mongoose.model("record", record);
 export {};

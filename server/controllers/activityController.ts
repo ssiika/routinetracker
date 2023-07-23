@@ -1,28 +1,18 @@
 const asyncHandler = require('express-async-handler');
 const Activity = require('../models/activityModel');
-import express, {Request, Response} from 'express';
-
-interface ActivityFormat {
-    _id: string;
-    user: string;
-    name: string;
-    timeslots: { day: number, starttime: number, duration: number }[];
-}
-
-interface RequestWUser extends Request {
-    user: any
-  }
+import express, { Response } from 'express';
+import { RequestWUser, ActivityFormat } from '../types';
 
 
 const addActivity = asyncHandler(async (req: RequestWUser, res: Response) => {
     // timeslots not required when creating activity
-    const { name } = req.body;
+    const { name, start } = req.body;
 
     const userId = req.user._id;
 
-    if (!name) {
+    if (!name || !start) {
         res.status(400)
-        throw new Error('Request must have a name')
+        throw new Error('Request must have a name and a start date')
     }
 
     const activityAlreadyExists = await Activity.findOne({userId, name})
@@ -35,6 +25,7 @@ const addActivity = asyncHandler(async (req: RequestWUser, res: Response) => {
     const activity = await Activity.create({
         user: userId,
         name, 
+        start,
         timeslots: []
     }) as ActivityFormat
 

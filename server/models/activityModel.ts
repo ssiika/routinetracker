@@ -12,6 +12,10 @@ const activity = new Schema(
             type: String,
             required: [true, 'Please provide name']
         },
+        start: {
+            type: Date,
+            required: [true, 'Please provide start date']
+        },
         timeslots: [{
             // monday = 0, tuesday = 1 etc.
             day: {
@@ -27,10 +31,8 @@ const activity = new Schema(
                 required: [true, 'Please provide timeslot duration']
             }
         }
-        ]},
-        {
-            timestamps: true
-        }
+        ]
+    }
 )
 
 module.exports = mongoose.model("activity", activity);

@@ -44,7 +44,7 @@ function Log() {
                   return (
                   <div className="activitybox">
                   <div className="activityHeader" key={activity._id}>{activity.name}</div>
-                    <Calendar start={activity.createdAt} records={activityRecords}/>
+                    <Calendar start={activity.start} records={activityRecords}/>
                   </div>
                   )})}
             </div>

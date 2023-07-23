@@ -1,18 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const Record = require('../models/recordModel');
 import express, {Request, Response} from 'express';
-
-interface RecordFormat {
-    _id: String,
-    activity_id: String,
-    day: Date,
-    expected: Number,
-    actual: Number
-}
-
-interface RequestWUser extends Request {
-    user: any
-  }
+import { RequestWUser, RecordFormat } from '../types'
 
 const addRecord = asyncHandler(async (req: RequestWUser, res: Response) => {
     const { activity_id, day, time} = req.body;

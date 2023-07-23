@@ -1,16 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const Activity = require('../models/activityModel');
 import express, {Request, Response} from 'express';
-
-interface TimeslotFormat {
-    day: Number,
-    starttime: Number,
-    duration: Number
-}
-
-interface RequestWUser extends Request {
-    user: any
-  }
+import { RequestWUser, TimeslotFormat } from '../types';
 
 const addTimeslot = asyncHandler(async (req: RequestWUser, res: Response) => {
     const { day, starttime, duration } = req.body
