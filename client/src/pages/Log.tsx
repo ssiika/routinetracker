@@ -34,23 +34,26 @@ function Log() {
   return (
     <>
         <Sidebar />
-        <div className='content'>Log time spent in your activities
-          {userActivityList.length > 0 ? (
-            <div>
-              {userActivityList.map(function(activity) {
-                const activityRecords = userRecordList.filter((record) => 
-                  record.activity_id === activity._id
-                  )
-                  return (
-                  <div className="activitybox">
-                  <div className="activityHeader" key={activity._id}>{activity.name}</div>
-                    <Calendar start={activity.start} records={activityRecords}/>
-                  </div>
-                  )})}
-            </div>
-          ) : (
-          <h3>You have no activities yet</h3>
-          )}
+        <div className='log-content'>
+          <div className='log-title'>Log time spent in your activities</div>
+            <div className='log-activities'>
+              {userActivityList.length > 0 ? (
+                <>
+                  {userActivityList.map(function(activity) {
+                    const activityRecords = userRecordList.filter((record) => 
+                      record.activity_id === activity._id
+                      )
+                      return (
+                      <div className="activitybox">
+                            <div className="activityHeader" key={activity._id}>{activity.name}</div>
+                              <Calendar start={activity.start} records={activityRecords}/>
+                            </div>
+                      )})}
+                </>
+              ) : (
+                <h3>You have no activities yet</h3>
+              )}
+          </div>
         </div>
         
     </>

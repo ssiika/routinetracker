@@ -1,24 +1,55 @@
 import React from 'react'
 import { Record } from '../types'
+import CalendarNode from './CalendarNode'
 
 
 function Calendar({start, records}: {start: Date, records: Record[]}) {
     const formattedStart = new Date(start).getTime()
     var today = new Date().getTime()
-
-
-    // ISSUE: does not return record made on day of activity creation
     
-    // calendarEnd returns either a period of 30 days, or if the activity was created within 30 days the number of days since then 
-    var calendarEnd = Math.min((today - formattedStart), (24*60*60*1000) * 30)
-    var recentRecords = records.filter((record) => new Date(record.day).getTime() >= (today - calendarEnd))
+
+    const addDays = function(date: Date, days: number) {
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+
+    
+    // calendarStart returns either a date 30 days ago, or if the activity was created within 30 days the date of creation
+    var calendarStart: Date = new Date(today - Math.min((today - formattedStart), (24*60*60*1000) * 30))
+    var recentRecords = records.filter((record) => new Date(record.day).getTime() >= calendarStart.getTime())
+    var largestTimeValue = Math.max(...recentRecords.map(x => x.time))
+    
+    // ISSUE: need to turn record.day into Date not string
   return ( 
-    <>
-        {recentRecords.map((record) => 
-            <div>{start.toString()}, {new Date().toString()}, {record.day.toString()},  {record.time}</div>
-        )}
-    </>
+        <div className="calendarBox">
+            {(function (start: Date, end: Date) {
+                let calendarArray = []
+                while (start.toLocaleDateString() !== end.toLocaleDateString()) {
+
+                    // Check if there is a record in recent records matching the relevant date
+
+                    let foundRecord;
+
+                    for (let i = 0; i < recentRecords.length; i++) {
+                        const date = new Date(recentRecords[i].day).toLocaleDateString()
+                        if (date === start.toLocaleDateString()) {
+                            foundRecord = recentRecords.splice(i, 1)
+                            calendarArray.push(<CalendarNode date={start.toLocaleDateString()} time={foundRecord[0].time} max={largestTimeValue} />)
+                            break;
+                        }
+                    }
+
+                    if (!foundRecord) {
+                        calendarArray.push(<CalendarNode date={start.toLocaleDateString()} time={0} max={largestTimeValue} />)
+                    }
+
+                    addDays(start, 1)
+                }
+                return calendarArray
+            })(calendarStart, new Date())}
+        </div>
     )
 }
-// Loop with smallest value between 30 days and time between start and now
+
+
 export default Calendar
