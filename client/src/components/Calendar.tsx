@@ -1,9 +1,10 @@
 import React from 'react'
-import { Record } from '../types'
+import { Record, Activity } from '../types'
 import CalendarNode from './CalendarNode'
 
 
-function Calendar({start, records}: {start: Date, records: Record[]}) {
+function Calendar({records, calendarClick, activityData}: {records: Record[], calendarClick: Function, activityData: Activity}) {
+    const start = activityData.start
     const formattedStart = new Date(start).getTime()
     var today = new Date().getTime()
     
@@ -29,18 +30,33 @@ function Calendar({start, records}: {start: Date, records: Record[]}) {
                     // Check if there is a record in recent records matching the relevant date
 
                     let foundRecord;
+                
+                    // Record data is an object in a format ready to be sent to the update record form 
+                    
+                    let recordData;
 
                     for (let i = 0; i < recentRecords.length; i++) {
                         const date = new Date(recentRecords[i].day).toLocaleDateString()
                         if (date === start.toLocaleDateString()) {
                             foundRecord = recentRecords.splice(i, 1)
-                            calendarArray.push(<CalendarNode date={start.toLocaleDateString()} time={foundRecord[0].time} max={largestTimeValue} />)
+                            recordData = {
+                                id: foundRecord[0]._id,
+                                activity_id: activityData._id,
+                                activity_name: activityData.name,
+                                date: start.toLocaleDateString()
+                            }
+                            calendarArray.push(<CalendarNode  recordData={recordData} time={foundRecord[0].time} max={largestTimeValue} />)
                             break;
                         }
                     }
 
                     if (!foundRecord) {
-                        calendarArray.push(<CalendarNode date={start.toLocaleDateString()} time={0} max={largestTimeValue} />)
+                        recordData = {
+                            activity_id: activityData._id,
+                            activity_name: activityData.name,
+                            date: start.toLocaleDateString()
+                        }
+                        calendarArray.push(<CalendarNode recordData={recordData} time={0} max={largestTimeValue} />)
                     }
 
                     addDays(start, 1)

@@ -42,3 +42,10 @@ export interface User {
     username: string,
     password: string
 }
+
+export interface RecordUpdateData {
+    id?: string,
+    activity_id: string,
+    activity_name: string,
+    date: Date | string
+}

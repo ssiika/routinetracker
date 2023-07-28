@@ -30,16 +30,16 @@ const getRecords = asyncHandler(async (req: RequestWUser, res: Response) => {
 })
 
 const updateRecord = asyncHandler(async (req: RequestWUser, res: Response) => {
-    // Update actual parameter
+    // Update time parameter
 
-    const { actual } = req.body
+    const { time } = req.body
 
-    if (actual === undefined) {
+    if (time === undefined) {
         res.status(400)
-        throw new Error('Request must have actual parameter')
+        throw new Error('Request must have time parameter')
     }
 
-    const recordUpdate = await Record.updateOne({"_id": req.params.id, "user": req.user._id}, {$set: {"actual": actual }});
+    const recordUpdate = await Record.updateOne({"_id": req.params.id, "user": req.user._id}, {$set: {"time": time }});
 
     res.status(200).json(recordUpdate)
 })

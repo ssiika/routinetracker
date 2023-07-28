@@ -5,15 +5,15 @@ function Sidebar() {
   return (
     <div className='sidebar'>
         <li className='sidebarLink'>
-            <Link to='/log'>
-                Log
-            </Link>
-        </li>
-        <li className='sidebarLink'>
             <Link to='/schedule'>
                 Schedule
             </Link>
         </li>
+        <li className='sidebarLink'>
+            <Link to='/log'>
+                Log
+            </Link>
+        </li>   
         <li className='sidebarLink'>
             <Link to='/history'>
                 History

@@ -1,6 +1,7 @@
 import React, {useState } from 'react'
+import { RecordUpdateData } from '../types';
 
-function CalendarNode({date, time, max}: {date: string, time: number, max: number}) {
+function CalendarNode({recordData, time, max}: {recordData: RecordUpdateData, time: number, max: number}) {
   const [hover, setHover] = useState(false);
   const onHover = () => {
     setHover(true)
@@ -16,7 +17,7 @@ function CalendarNode({date, time, max}: {date: string, time: number, max: numbe
   
   return (
     <div style={nodeFilterStyle} onMouseEnter={onHover} onMouseLeave={onLeave} className="calendarNode">
-      <span className={hover ? "calendarHover" : ""}>{hover ? `${time} minutes on ${date}` : ''}</span>
+      <span className={hover ? "calendarHover" : ""}>{hover ? `${time} minutes on ${recordData.date}` : ''}</span>
     </div> 
   )
 }
