@@ -18,11 +18,12 @@ function Log() {
   const {userRecordList} = useSelector((state: RootState) => state.records)
   const {userActivityList} = useSelector((state: RootState) => state.activities);
 
-  const [recordData, setRecordData] = useState({});
+  const [recordData, setRecordData] = useState<RecordUpdateData | null>(null);
 
   const calendarClick = (data: RecordUpdateData) => {
     return setRecordData(data)
   }
+
 
   useEffect(() => {
     if (!user) {
