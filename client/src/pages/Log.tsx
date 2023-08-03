@@ -37,7 +37,7 @@ function Log() {
       dispatch(recordReset())
       dispatch(activityReset())
     }
-  }, [user])
+  }, [user, dispatch, navigate])
 
   return (
     <>
