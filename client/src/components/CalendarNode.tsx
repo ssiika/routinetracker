@@ -19,7 +19,7 @@ function CalendarNode({recordData, time, max, calendarClick}: {
   
   return (
     <div style={nodeFilterStyle} onMouseEnter={onHover} onMouseLeave={onLeave} onClick={() => calendarClick(recordData)} className="calendarNode">
-      <span className={hover ? "calendarHover" : ""}>{hover ? `${time} minutes on ${recordData.date}` : ''}</span>
+      <span className={hover ? "calendarHover" : ""}>{hover ? `${time} minutes on ${recordData.day}` : ''}</span>
     </div> 
   )
 }

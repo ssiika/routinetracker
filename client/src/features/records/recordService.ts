@@ -44,9 +44,32 @@ const getRecords = async (token: string) => {
     return response;
 }
 
+const updateRecord = async (recordData: {id: string, time: string}, token: string) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    const response = await axios.put(API_URL + recordData.id, recordData, config)
+        .catch(function (error) {
+            if (error.response.data) {
+                throw new Error(error.response.data.message);
+            }
+            })
+            
+    if (response && response.data) {
+        return response.data
+    }
+        
+
+    return response;
+}
+
+
 const recordService = {
     createRecord,
-    getRecords
+    getRecords,
+    updateRecord
 }
 
 export default recordService

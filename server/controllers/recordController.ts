@@ -39,7 +39,7 @@ const updateRecord = asyncHandler(async (req: RequestWUser, res: Response) => {
         throw new Error('Request must have time parameter')
     }
 
-    const recordUpdate = await Record.updateOne({"_id": req.params.id, "user": req.user._id}, {$set: {"time": time }});
+    const recordUpdate = await Record.findOneAndUpdate({"_id": req.params.id, "user": req.user._id}, {$set: {"time": time }}, {returnDocument: 'after'});
 
     res.status(200).json(recordUpdate)
 })

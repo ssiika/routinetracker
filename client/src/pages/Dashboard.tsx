@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { UseSelector, useSelector } from 'react-redux/es/hooks/useSelector'
+import { useSelector } from 'react-redux/es/hooks/useSelector'
 import type { RootState } from '../app/store';
-import { RootQuerySelector } from 'mongoose';
 import Sidebar from '../components/Sidebar';
 
 function Dashboard() {

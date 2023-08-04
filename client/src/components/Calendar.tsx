@@ -43,7 +43,7 @@ function Calendar({records, calendarClick, activityData}: {records: Record[], ca
                                 id: foundRecord[0]._id,
                                 activity_id: activityData._id,
                                 activity_name: activityData.name,
-                                date: start.toLocaleDateString()
+                                day: start.toLocaleDateString()
                             }
                             calendarArray.push(<CalendarNode  recordData={recordData} time={foundRecord[0].time} max={largestTimeValue} calendarClick={calendarClick}/>)
                             break;
@@ -54,7 +54,7 @@ function Calendar({records, calendarClick, activityData}: {records: Record[], ca
                         recordData = {
                             activity_id: activityData._id,
                             activity_name: activityData.name,
-                            date: start.toLocaleDateString()
+                            day: start.toLocaleDateString()
                         }
                         calendarArray.push(<CalendarNode recordData={recordData} time={0} max={largestTimeValue} calendarClick={calendarClick}/>)
                     }

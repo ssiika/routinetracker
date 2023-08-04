@@ -41,6 +41,21 @@ async (_, thunkAPI) => {
     }
 })
 
+export const updateRecord = createAsyncThunk<Record, {id: string, time: string}, { state: RootState }>('record/update',
+async (recordData, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token
+        return await recordService.updateRecord(recordData, token);
+    } catch (error) {
+        let message = 'unknown error message'
+        if (error instanceof Error) {
+                message = error.message || 
+                error.toString();
+                return thunkAPI.rejectWithValue(message)
+        }
+    }
+})
+
 export const recordSlice = createSlice({
     name: 'record', 
     initialState, 
@@ -73,6 +88,22 @@ export const recordSlice = createSlice({
                 state.userRecordList = action.payload;
             })
             .addCase(getRecords.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload as string;
+            })
+            .addCase(updateRecord.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateRecord.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.message = '';
+                state.userRecordList = state.userRecordList.map((record) => record._id === action.payload._id ? 
+                action.payload : 
+                record);
+            })
+            .addCase(updateRecord.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload as string;
