@@ -42,7 +42,7 @@ function Log() {
   return (
     <>
         <Sidebar />
-        <div className='log-content'>
+        <div className='content'>
           <div className='log-title'>Log time spent in your activities</div>
             <RecordForm record={recordData} />
             <div className='log-activities'>
@@ -53,7 +53,7 @@ function Log() {
                       record.activity_id === activity._id
                       )
                       return (
-                      <div className="activitybox">
+                      <div className="activitybox" style={{border: `3px solid rgb(${activity.color})`}}>
                             <div className="activityHeader" key={activity._id}>{activity.name}</div>
                               <Calendar records={activityRecords} calendarClick={calendarClick} activityData={activity} />
                             </div>

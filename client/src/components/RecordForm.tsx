@@ -40,7 +40,7 @@ function RecordForm( {record}: {record: RecordUpdateData | null})  {
   return (
     <>
       <div>
-        {record ? `${record.activity_name} on ${record.day}` : 'Click on a day to add a record'}
+        {record ? `Minutes spent on ${record.activity_name} on ${record.day}:` : 'Click on a day to add a record'}
       </div>
       <form onSubmit={onSubmit}>
         <input type="text"

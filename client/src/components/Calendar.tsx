@@ -45,7 +45,14 @@ function Calendar({records, calendarClick, activityData}: {records: Record[], ca
                                 activity_name: activityData.name,
                                 day: start.toLocaleDateString()
                             }
-                            calendarArray.push(<CalendarNode  recordData={recordData} time={foundRecord[0].time} max={largestTimeValue} calendarClick={calendarClick}/>)
+                            calendarArray.push(
+                                <CalendarNode  
+                                    recordData={recordData} 
+                                    time={foundRecord[0].time} 
+                                    max={largestTimeValue} 
+                                    calendarClick={calendarClick}
+                                    color={activityData.color}
+                                />)
                             break;
                         }
                     }
@@ -56,7 +63,14 @@ function Calendar({records, calendarClick, activityData}: {records: Record[], ca
                             activity_name: activityData.name,
                             day: start.toLocaleDateString()
                         }
-                        calendarArray.push(<CalendarNode recordData={recordData} time={0} max={largestTimeValue} calendarClick={calendarClick}/>)
+                        calendarArray.push(
+                            <CalendarNode 
+                                recordData={recordData} 
+                                time={0} 
+                                max={largestTimeValue} 
+                                calendarClick={calendarClick}
+                                color={activityData.color}
+                            />)
                     }
 
                     addDays(start, 1)

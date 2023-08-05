@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaSignOutAlt, FaUser } from 'react-icons/fa';
 import {Link, useNavigate} from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -10,6 +10,14 @@ function Header() {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const {user} = useSelector((state: RootState) => state.auth);
+
+    const [dropdownActive, setDropdownActive] = useState(false)
+
+    const menuToggle = (e: React.MouseEvent) => {
+        if (e.target === e.currentTarget) {
+            setDropdownActive(!dropdownActive)
+        }  
+    }
 
     const onLogout = () => {
         dispatch(logout());
@@ -28,9 +36,19 @@ function Header() {
                         {user.username}
                     </li>
                     <li>
-                        <button className='logout' onClick={onLogout}>
-                            <FaSignOutAlt /> Logout
-                        </button>
+                        <div className="userIcon" onClick={menuToggle}>
+                            
+                                <div className={dropdownActive ? "dropdown visible" : "dropdown"}>
+                                    <li>
+                                        <Link to='/colors'>Color settings</Link>
+                                    </li>
+                                    <li>
+                                        <button className='logout' onClick={onLogout}>
+                                            <FaSignOutAlt /> Logout
+                                        </button>
+                                    </li>
+                                </div> 
+                        </div>
                     </li>
                 </>
                 ) : (
@@ -51,5 +69,6 @@ function Header() {
     </header>
   )
 }
+
 
 export default Header

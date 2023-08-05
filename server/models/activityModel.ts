@@ -16,6 +16,10 @@ const activity = new Schema(
             type: Date,
             required: [true, 'Please provide start date']
         },
+        color: {
+            type: String,
+            required: [true, 'Please provide color']
+        },
         timeslots: [{
             // monday = 0, tuesday = 1 etc.
             day: {

@@ -16,6 +16,9 @@ code {
   margin-left: 50px;
   margin-top: 50px;
   display: grid;
+  grid-template-columns: 150px auto;
+  grid-template-rows: 170px auto;
+  
 }
 
 .sidebar {
@@ -26,8 +29,8 @@ code {
   border: 1px solid black;
   background-color: white;
 }
-.form,
-.content {
+
+.form {
   width: 70%;
   margin: 0 auto;
 }
@@ -121,6 +124,7 @@ code {
 }
 
 .header {
+  grid-area: 1 / 1 / 2 / 3;
   display: grid;
   grid-template-columns: 650px 650px;
   justify-self: center;
@@ -257,11 +261,13 @@ h1 {
   gap: 5px;
 }
 
-.log-content {
-  width: 1300px;
-  justify-self: center;
+.content {
+  width: 1300px; 
+  box-sizing: border-box;
+  padding-left: 150px;
   display: grid;
   gap: 50px;
+  grid-area: -2 / -2 / -1 / -1;
 }
 
 .log-activities {
@@ -275,7 +281,6 @@ h1 {
 }
 
 .activitybox {
-  border: 3px solid grey;
   border-radius: 3px;
   height: 250px;
   width: 250px;
@@ -329,4 +334,30 @@ h1 {
 	border-top-color: rgb(85, 84, 84);
 	border-width: 5px;
 	margin-left: -5px;
+}
+
+.userIcon {
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+  background-color: #828282;
+  position: relative;
+}
+
+.dropdown {
+  display: none;
+  height: 250px;
+  width: 150px;
+  position: absolute;
+  box-sizing: border-box;
+  padding: 20px;
+  border: 3px solid black;
+  border-radius: 3px;
+  box-shadow: 3px 3px lightgray;
+  top: 45px;
+  right: 10px;
+}
+
+.visible {
+  display: block;
 }

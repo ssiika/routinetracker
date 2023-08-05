@@ -1,9 +1,14 @@
 import React, {useState } from 'react'
 import { RecordUpdateData } from '../types';
 
-function CalendarNode({recordData, time, max, calendarClick}: {
-  recordData: RecordUpdateData, time: number, max: number, calendarClick: Function
+function CalendarNode({recordData, time, max, calendarClick, color}: {
+  recordData: RecordUpdateData, 
+  time: number, 
+  max: number, 
+  calendarClick: Function,
+  color: string
   }) {
+
   const [hover, setHover] = useState(false);
   const onHover = () => {
     setHover(true)
@@ -14,7 +19,7 @@ function CalendarNode({recordData, time, max, calendarClick}: {
   }
 
   const nodeFilterStyle = {
-    backgroundColor: `rgb(54, 143, 54, ${time / max})`
+    backgroundColor: `rgb(${color}, ${time / max})`
   }
   
   return (

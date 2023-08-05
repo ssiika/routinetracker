@@ -8,6 +8,7 @@ export interface ActivityFormat {
     _id: string,
     user: string,
     name: string,
+    color: string,
     start: Date,
     timeslots: TimeslotFormat[]
 }

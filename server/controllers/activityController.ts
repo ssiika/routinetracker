@@ -6,13 +6,16 @@ import { RequestWUser, ActivityFormat } from '../types';
 
 const addActivity = asyncHandler(async (req: RequestWUser, res: Response) => {
     // timeslots not required when creating activity
-    const { name, start } = req.body;
+
+    // color should be rgb values formatted as such: 'x, y, z'
+    
+    const { name, start, color } = req.body;
 
     const userId = req.user._id;
 
-    if (!name || !start) {
+    if (!name || !start || !color) {
         res.status(400)
-        throw new Error('Request must have a name and a start date')
+        throw new Error('Request must have a name, start date and color')
     }
 
     const activityAlreadyExists = await Activity.findOne({userId, name})
@@ -26,6 +29,7 @@ const addActivity = asyncHandler(async (req: RequestWUser, res: Response) => {
         user: userId,
         name, 
         start,
+        color,
         timeslots: []
     }) as ActivityFormat
 

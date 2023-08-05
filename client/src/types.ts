@@ -19,6 +19,7 @@ export interface Activity {
     _id: string,
     user: string,
     name: string,
+    color: string,
     start: Date,
     timeslots: Timeslot[]
 }
