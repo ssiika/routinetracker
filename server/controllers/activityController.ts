@@ -44,6 +44,21 @@ const getActivities = asyncHandler(async (req: RequestWUser, res: Response) => {
     res.status(200).json(activities)
 })
 
+const updateActivity = asyncHandler(async (req: RequestWUser, res: Response) => {
+    // Update color parameter
+
+    const { color } = req.body
+
+    if (color === undefined) {
+        res.status(400)
+        throw new Error('Request must have color parameter')
+    }
+
+    const recordUpdate = await Activity.findOneAndUpdate({"_id": req.params.id, "user": req.user._id}, {$set: {"color": color }}, {returnDocument: 'after'});
+
+    res.status(200).json(recordUpdate)
+})
+
 
 const deleteActivity = asyncHandler(async (req: RequestWUser, res: Response) => {
     const deletedResponse = await Activity.deleteOne({"_id": req.params.id, "user": req.user._id})
@@ -55,5 +70,6 @@ const deleteActivity = asyncHandler(async (req: RequestWUser, res: Response) => 
 module.exports = {
     addActivity,
     getActivities,
+    updateActivity,
     deleteActivity
 }

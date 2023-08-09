@@ -41,6 +41,21 @@ async (_, thunkAPI) => {
     }
 })
 
+export const updateActivity = createAsyncThunk<Activity, {id: string, color: string}, { state: RootState }>('activity/update',
+async (activityData, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token
+        return await activityService.updateActivity(activityData, token);
+    } catch (error) {
+        let message = 'unknown error message'
+        if (error instanceof Error) {
+                message = error.message || 
+                error.toString();
+                return thunkAPI.rejectWithValue(message)
+        }
+    }
+})
+
 export const activitySlice = createSlice({
     name: 'activity', 
     initialState, 
@@ -73,6 +88,22 @@ export const activitySlice = createSlice({
                 state.userActivityList = action.payload;
             })
             .addCase(getActivities.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload as string;
+            })
+            .addCase(updateActivity.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateActivity.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.message = '';
+                state.userActivityList = state.userActivityList.map((activity) => activity._id === action.payload._id ? 
+                action.payload : 
+                activity);
+            })
+            .addCase(updateActivity.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload as string;

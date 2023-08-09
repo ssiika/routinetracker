@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { FaSignOutAlt, FaUser, FaCog } from 'react-icons/fa';
 import {Link, useNavigate} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../app/store.js'
@@ -40,7 +40,10 @@ function Header() {
                             
                                 <div className={dropdownActive ? "dropdown visible" : "dropdown"}>
                                     <li>
-                                        <Link to='/colors'>Color settings</Link>
+                                        <Link to='/colors'>
+                                            <FaCog />Color settings
+                                        </Link>
+                                        
                                     </li>
                                     <li>
                                         <button className='logout' onClick={onLogout}>
