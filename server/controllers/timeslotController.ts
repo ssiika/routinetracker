@@ -4,17 +4,17 @@ import express, {Request, Response} from 'express';
 import { RequestWUser, TimeslotFormat } from '../types';
 
 const addTimeslot = asyncHandler(async (req: RequestWUser, res: Response) => {
-    const { day, starttime, duration } = req.body
+    const { day, starttime, endtime } = req.body
         
-    if (day === undefined || starttime === undefined || duration === undefined) {
+    if (day === undefined || starttime === undefined || endtime === undefined) {
         res.status(400)
-        throw new Error('Request must have day, starttime and duration parameters')
+        throw new Error('Request must have day, starttime and endtime parameters')
     }
 
     const timeslotObject = {
         day, 
         starttime,
-        duration
+        endtime
     }
 
     const timeslotUpdate = await Activity.updateOne({_id: req.params.id, user: req.user._id}, {$push: {"timeslots": timeslotObject }}) as TimeslotFormat;

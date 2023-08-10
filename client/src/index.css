@@ -382,6 +382,43 @@ h1 {
   left: 30px;
 }
 
+.schedule {
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, 150px);
+  grid-template-rows: auto;
+  grid-auto-flow: row;
+}
+
+.dayTable {
+  width: 150px;
+  text-align: center;
+  border-spacing: 0;
+  border: 2px solid rgb(90, 90, 90);
+  border-right: 0;
+}
+
+.dayBox:last-child .dayTable{
+  border-right: 2px solid rgb(90, 90, 90);
+}
+
+.timeslot {
+  height: 8px;
+  border: 1px solid rgb(230, 230, 230);
+}
+
+tr:nth-child(2n) td {
+  border-bottom: 1px solid rgb(168, 168, 168);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+
+
+
+
 .visible {
   display: grid;
 }
+
