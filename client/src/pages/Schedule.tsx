@@ -1,13 +1,22 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar'
+import TimeslotForm from '../components/TimeslotForm'
 
 function Schedule() {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  const times = ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm', '12am']
   return (
     <>
         <Sidebar />
         <div className='content'>
           <div className="schedule">
+            <div className="timeLegend">
+              {times.map((time) => {
+                return (
+                  <div className="timeLegendBox">{time}</div>
+                )
+              })}
+            </div>
             {days.map((day, index) => {
               return (
               <div className="dayBox">
@@ -36,6 +45,7 @@ function Schedule() {
             )
           })}
           </div>
+          <TimeslotForm />
         </div>
     </>
   )

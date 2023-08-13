@@ -42,6 +42,7 @@ async (_, thunkAPI) => {
 })
 
 export const updateActivity = createAsyncThunk<Activity, {id: string, color: string}, { state: RootState }>('activity/update',
+// For updating color
 async (activityData, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
@@ -55,6 +56,24 @@ async (activityData, thunkAPI) => {
         }
     }
 })
+
+export const createTimeslot = createAsyncThunk
+<Activity, {id: string, day: string, starttime: number, endtime: number}, { state: RootState }>
+('activity/update',
+async (recordData, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token
+        return await activityService.createTimeslot(recordData, token);
+    } catch (error) {
+        let message = 'unknown error message'
+        if (error instanceof Error) {
+                message = error.message || 
+                error.toString();
+                return thunkAPI.rejectWithValue(message)
+        }
+    }
+})
+
 
 export const activitySlice = createSlice({
     name: 'activity', 
