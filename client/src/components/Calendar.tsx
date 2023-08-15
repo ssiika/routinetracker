@@ -47,6 +47,7 @@ function Calendar({records, calendarClick, activityData}: {records: Record[], ca
                             }
                             calendarArray.push(
                                 <CalendarNode  
+                                    key={calendarArray.length}
                                     recordData={recordData} 
                                     time={foundRecord[0].time} 
                                     max={largestTimeValue} 
@@ -65,6 +66,7 @@ function Calendar({records, calendarClick, activityData}: {records: Record[], ca
                         }
                         calendarArray.push(
                             <CalendarNode 
+                                key={calendarArray.length}
                                 recordData={recordData} 
                                 time={0} 
                                 max={largestTimeValue} 
