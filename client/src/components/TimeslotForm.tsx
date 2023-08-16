@@ -5,6 +5,7 @@ import type { RootState } from '../app/store';
 import {useSelector} from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { getActivities, activityReset } from '../features/activities/activitySlice'
+import Spinner from './Spinner';
 
 function TimeslotForm() {
     const dispatch = useAppDispatch();
@@ -21,7 +22,7 @@ function TimeslotForm() {
     const [clientMessage, setClientMessage] = useState('')
 
     const {user} = useSelector((state: RootState) => state.auth);
-    const {userActivityList, message} = useSelector((state: RootState) => state.activities);
+    const {userActivityList, message, isLoading} = useSelector((state: RootState) => state.activities);
     
     const onSelectChange = (e: SyntheticEvent, fn: Function) => {
         e.preventDefault();
@@ -33,7 +34,7 @@ function TimeslotForm() {
         fn(value)
     }
 
-    const onSubmit = (e: SyntheticEvent) => {
+    const onSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
         const target = e.target as typeof e.target & {
@@ -48,6 +49,7 @@ function TimeslotForm() {
         
         const startTime = target.startHours.value.concat(target.startMinutes.value)
         const endTime = target.endHours.value.concat(target.endMinutes.value)
+        const day = target.daySelect.value
 
 
         if (startTime === endTime) {
@@ -55,15 +57,32 @@ function TimeslotForm() {
             return;
         }
 
+        // Check that inputted time doesnt overlap with existing timeslots
+
+        for (let i = 0; i < userActivityList.length; i++) {
+            for (let j = 0; j < userActivityList[i].timeslots.length; j++) {               
+                let timeslot = userActivityList[i].timeslots[j]
+                if (day === timeslot.day) {
+                    const isOverlap = (timeslot.startTime >= startTime && endTime > timeslot.startTime) ||
+                    (startTime >= timeslot.startTime && timeslot.endTime > startTime) 
+                    if (isOverlap) {
+                        setClientMessage('Timeslot overlaps with existing timeslot')
+                        return;
+                    }
+                }
+                
+            }
+        }
+
         const bodyData = {
             startTime,
             endTime,
-            day: target.daySelect.value,
+            day,
             id: target.activitySelect.value
         }
 
         setClientMessage('')
-        dispatch(createTimeslot(bodyData));
+        await dispatch(createTimeslot(bodyData));
         
     }
 
@@ -79,6 +98,10 @@ function TimeslotForm() {
         }
       }, [user, dispatch, navigate])
 
+
+    if (isLoading) {
+        return <Spinner />
+    }
     return (
     <section className="addTimeslotFormBox">
         <label htmlFor="timeslotForm">Add a Timeslot</label>

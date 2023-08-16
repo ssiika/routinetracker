@@ -23,6 +23,6 @@ export interface RecordFormat {
 
 export interface TimeslotFormat {
     day: string,
-    starttime: string,
-    endtime: string
+    startTime: string,
+    endTime: string
 }

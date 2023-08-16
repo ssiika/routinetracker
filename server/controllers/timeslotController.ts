@@ -17,7 +17,7 @@ const addTimeslot = asyncHandler(async (req: RequestWUser, res: Response) => {
         endTime
     }
 
-    const timeslotUpdate = await Activity.findOneAndUpdate({_id: req.params.id, user: req.user._id}, {$push: {"timeslots": timeslotObject }}) as TimeslotFormat;
+    const timeslotUpdate = await Activity.findOneAndUpdate({_id: req.params.id, user: req.user._id}, {$push: {"timeslots": timeslotObject }}, {returnDocument: 'after'}) as TimeslotFormat;
 
     res.status(200).json(timeslotUpdate)
 })

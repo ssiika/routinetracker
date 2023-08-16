@@ -59,7 +59,7 @@ async (activityData, thunkAPI) => {
 
 export const createTimeslot = createAsyncThunk
 <Activity, {id: string, day: string, startTime: string, endTime: string}, { state: RootState }>
-('activity/update',
+('activity/createTimeslot',
 async (recordData, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
@@ -123,6 +123,22 @@ export const activitySlice = createSlice({
                 activity);
             })
             .addCase(updateActivity.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload as string;
+            })
+            .addCase(createTimeslot.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(createTimeslot.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.message = '';
+                state.userActivityList = state.userActivityList.map((activity) => activity._id === action.payload._id ? 
+                action.payload : 
+                activity);
+            })
+            .addCase(createTimeslot.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload as string;

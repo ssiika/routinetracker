@@ -34,8 +34,8 @@ export interface activityState {
 
 export interface Timeslot {
     day: string,
-    starttime: string,
-    endtime: string
+    startTime: string,
+    endTime: string
 }
 
 
