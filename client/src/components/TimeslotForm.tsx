@@ -10,15 +10,18 @@ function TimeslotForm() {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const ref = React.useRef<SyntheticEvent>(null)
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
     // These states are necessary for making sure the user can't select the end time to be before the start time
     const [startHours, setStartHours] = useState('00')
     const [startMinutes, setStartMinutes] = useState('00')
     const [endHours, setEndHours] = useState('00')
     const [endMinutes, setEndMinutes] = useState('00')
+
+    const [clientMessage, setClientMessage] = useState('')
+
     const {user} = useSelector((state: RootState) => state.auth);
-    const {userActivityList} = useSelector((state: RootState) => state.activities);
+    const {userActivityList, message} = useSelector((state: RootState) => state.activities);
     
     const onSelectChange = (e: SyntheticEvent, fn: Function) => {
         e.preventDefault();
@@ -32,7 +35,36 @@ function TimeslotForm() {
 
     const onSubmit = (e: SyntheticEvent) => {
         e.preventDefault();
-        // dispatch(createTimeslot('e'));
+
+        const target = e.target as typeof e.target & {
+            startHours: { value: string },
+            startMinutes: { value: string },
+            endHours: { value: string },
+            endMinutes: { value: string },
+            // Day is stored as a number, e.g. 0 for Monday, 1 for Tuesday
+            daySelect: { value: string },
+            activitySelect: { value: string }
+        }
+        
+        const startTime = target.startHours.value.concat(target.startMinutes.value)
+        const endTime = target.endHours.value.concat(target.endMinutes.value)
+
+
+        if (startTime === endTime) {
+            setClientMessage('Start time and end time must not be the same')
+            return;
+        }
+
+        const bodyData = {
+            startTime,
+            endTime,
+            day: target.daySelect.value,
+            id: target.activitySelect.value
+        }
+
+        setClientMessage('')
+        dispatch(createTimeslot(bodyData));
+        
     }
 
     useEffect(() => {
@@ -123,6 +155,14 @@ function TimeslotForm() {
                     })()
                     }   
                 </select>
+                <label htmlFor="daySelect">Day:</label>
+                <select name="daySelect" id="daySelect">
+                    {days.map((day, index) => {
+                        return (
+                            <option value={index}>{day}</option>
+                        )
+                    })}
+                </select>
                 <select name="activitySelect" id="activitySelect">
                     {userActivityList.map((activity) => {
                         return (
@@ -130,6 +170,9 @@ function TimeslotForm() {
                         )
                     })}
                 </select>
+                <div className="errorbox">
+                    {clientMessage || message}
+                </div>
                 <button type="submit" className="btn">Add</button>
         </form>
     </section>

@@ -58,7 +58,7 @@ async (activityData, thunkAPI) => {
 })
 
 export const createTimeslot = createAsyncThunk
-<Activity, {id: string, day: string, starttime: number, endtime: number}, { state: RootState }>
+<Activity, {id: string, day: string, startTime: string, endTime: string}, { state: RootState }>
 ('activity/update',
 async (recordData, thunkAPI) => {
     try {

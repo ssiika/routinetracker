@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_URL = '/api/activities/'
-const API_URL_RECORD = '/api/records/'
+const API_URL_TIMESLOT = '/api/timeslots/'
 
 const createActivity = async (activityData: object, token: string) => {
     const config = {
@@ -66,13 +66,13 @@ const updateActivity = async (activityData: {id: string, color: string}, token: 
     return response;
 }
 
-const createTimeslot = async (recordData: {id: string, day: string, starttime: number, endtime: number}, token: string) => {
+const createTimeslot = async (timeslotData: {id: string, day: string, startTime: string, endTime: string}, token: string) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     }
-    const response = await axios.post(API_URL_RECORD + recordData.id, recordData, config)
+    const response = await axios.post(API_URL_TIMESLOT + timeslotData.id, timeslotData, config)
         .catch(function (error) {
             if (error.response.data) {
                 throw new Error(error.response.data.message);

@@ -23,16 +23,16 @@ const activity = new Schema(
         timeslots: [{
             // monday = 0, tuesday = 1 etc.
             day: {
-                type: Number,
+                type: String,
                 required: [true, 'Please provide timeslot day']
             },
-            starttime: {
-                type: Number,
+            startTime: {
+                type: String,
                 required: [true, 'Please provide timeslot start time']
             },
-            duration: {
-                type: Number,
-                required: [true, 'Please provide timeslot duration']
+            endTime: {
+                type: String,
+                required: [true, 'Please provide timeslot end time']
             }
         }
         ]
