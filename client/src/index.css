@@ -336,6 +336,34 @@ h1 {
 	margin-left: -5px;
 }
 
+.timeslotHover {
+  position: absolute;
+  top: -40px;
+  left: -98px;
+  width: 220px;
+  background-color: rgb(85, 84, 84);
+  color: white;
+  padding: 5px;
+  text-align: center;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+
+.timeslotHover:after {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-top-color: rgb(85, 84, 84);
+	border-width: 5px;
+	margin-left: -5px;
+}
+
 .userIcon {
   height: 40px;
   width: 40px;
@@ -386,6 +414,7 @@ h1 {
   grid-template-columns: 50px repeat(auto-fill, 150px);
   grid-template-rows: auto;
   grid-auto-flow: row;
+  position: relative;
 }
 
 .dayTable {
@@ -419,6 +448,22 @@ tr:nth-child(2n) td {
   height: 72px;
   position: relative;
   top: -10px;
+}
+
+.overlay {
+  position: absolute;
+  background-color: rgba(144, 238, 144, 0.2);
+  height: 100%;
+  width: calc(100% - 100px);
+  left: 50px;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.timeslotBox {
+  width: 148px;
+  box-sizing: border-box;
+  position: absolute;
 }
 
 .errorbox {

@@ -1,6 +1,7 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar'
 import TimeslotForm from '../components/TimeslotForm'
+import ScheduleOverlay from '../components/ScheduleOverlay'
 
 function Schedule() {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -17,6 +18,7 @@ function Schedule() {
                 )
               })}
             </div>
+            <ScheduleOverlay />
             {days.map((day, index) => {
               return (
               <div className="dayBox">
@@ -29,7 +31,7 @@ function Schedule() {
                     for (let i = 0; i < 48; i++) {
                       tableArray.push(
                         <tr>
-                          <td id={`${index}-${0}`} className='timeslot'></td>
+                          <td id={`${index}-${i}`} className='timeslot'></td>
                         </tr>
                       )
                     }
