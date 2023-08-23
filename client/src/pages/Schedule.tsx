@@ -2,8 +2,13 @@ import React from 'react'
 import Sidebar from '../components/Sidebar'
 import TimeslotForm from '../components/TimeslotForm'
 import ScheduleOverlay from '../components/ScheduleOverlay'
+import {useSelector} from 'react-redux';
+import type { RootState } from '../app/store';
+import ActivityForm from '../components/ActivityForm';
 
 function Schedule() {
+  const {userActivityList} = useSelector((state: RootState) => state.activities);
+
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
   const times = ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm', '12am']
   return (
@@ -47,6 +52,18 @@ function Schedule() {
             )
           })}
           </div>
+          <div className="activityLegend">
+            {userActivityList.map((activity) => {
+              return (
+                <div className="legendBox">
+                  <div className="colorBox" style={{backgroundColor: `rgb(${activity.color})`}}></div>
+                  <div className="legendName">{activity.name}</div>
+                </div>
+                
+              )
+            })}
+          </div>
+          <ActivityForm />
           <TimeslotForm />
         </div>
     </>

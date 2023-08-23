@@ -143,7 +143,7 @@ function TimeslotForm() {
                 >
                     {(function () {
                         let hoursArray = [];
-                        for (let i = 0; i < 24; i++) {
+                        for (let i = 0; i < 25; i++) {
                             let hour = `${Math.floor(i / 10)}${i % 10}`
                             if (hour >= startHours) {
                                 hoursArray.push(
@@ -163,6 +163,11 @@ function TimeslotForm() {
                     value={endMinutes}
                 >
                     {(function () {
+                        if (endHours === '24') {
+                            return (
+                                <option value="00">00</option>
+                            )
+                        }
                         if (startHours === endHours && startMinutes === '30') {
                             return (
                                 <option value="30">30</option>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Timeslot, Activity } from '../types'
+import { start } from 'repl';
 
 function TimeslotBox({timeslot, activity}: {timeslot: Timeslot, activity: Activity}) {
     const [hover, setHover] = useState(false);
@@ -19,6 +20,7 @@ function TimeslotBox({timeslot, activity}: {timeslot: Timeslot, activity: Activi
     
     const style = { 
         top: `${(startDiv * 12) + 2}px`, 
+        left: `${parseInt(timeslot.day) * 150 + 2}px`,
         height: `${divSpan * 12}px`, 
         backgroundColor: `rgb(${activity.color}, 0.8)`    
     }
@@ -40,10 +42,7 @@ function TimeslotBox({timeslot, activity}: {timeslot: Timeslot, activity: Activi
             >
                 <span className={hover ? "timeslotHover" : ""}>
                     { hover ?
-                    `${timeslot.startTime} - ${timeslot.endTime},
-                    row: ${timeslot.day},
-                    start: ${startDiv}
-                    Divs occupied: ${divSpan}`
+                    `${activity.name}: ${timeslot.startTime} - ${timeslot.endTime}`
                     : ''
                     }
                 </span>

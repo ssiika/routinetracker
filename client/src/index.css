@@ -339,7 +339,7 @@ h1 {
 .timeslotHover {
   position: absolute;
   top: -40px;
-  left: -98px;
+  left: -35px;
   width: 220px;
   background-color: rgb(85, 84, 84);
   color: white;
@@ -347,6 +347,7 @@ h1 {
   text-align: center;
   border-radius: 2px;
   box-sizing: border-box;
+  z-index: 10;
 }
 
 
@@ -383,9 +384,11 @@ h1 {
   box-shadow: 3px 3px lightgray;
   top: 45px;
   right: 10px;
+  background-color: white;
+  z-index: 1;
 }
 
-.colorSelector {
+.colorBox {
   position: relative;
   height: 20px;
   width: 20px;
@@ -428,6 +431,7 @@ h1 {
 
 .dayBox:last-child .dayTable{
   border-right: 2px solid rgb(90, 90, 90);
+  width: 152px;
 }
 
 .timeslot {
@@ -452,7 +456,6 @@ tr:nth-child(2n) td {
 
 .overlay {
   position: absolute;
-  background-color: rgba(144, 238, 144, 0.2);
   height: 100%;
   width: calc(100% - 100px);
   left: 50px;
@@ -464,6 +467,20 @@ tr:nth-child(2n) td {
   width: 148px;
   box-sizing: border-box;
   position: absolute;
+}
+
+.activityLegend {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(5, auto);
+  gap: 10px;
+}
+
+.legendBox {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: auto auto;
+  align-items: center;
 }
 
 .errorbox {
