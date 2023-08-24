@@ -5,12 +5,14 @@ import ScheduleOverlay from '../components/ScheduleOverlay'
 import {useSelector} from 'react-redux';
 import type { RootState } from '../app/store';
 import ActivityForm from '../components/ActivityForm';
+import Spinner from '../components/Spinner';
 
 function Schedule() {
   const {userActivityList} = useSelector((state: RootState) => state.activities);
 
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
   const times = ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm', '12am']
+  
   return (
     <>
         <Sidebar />

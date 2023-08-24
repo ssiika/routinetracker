@@ -22,7 +22,7 @@ function TimeslotForm() {
     const [clientMessage, setClientMessage] = useState('')
 
     const {user} = useSelector((state: RootState) => state.auth);
-    const {userActivityList, message, isLoading} = useSelector((state: RootState) => state.activities);
+    const {userActivityList, message, isLoading, isError} = useSelector((state: RootState) => state.activities);
     
     const onSelectChange = (e: SyntheticEvent, fn: Function) => {
         e.preventDefault();
@@ -83,6 +83,10 @@ function TimeslotForm() {
 
         setClientMessage('')
         await dispatch(createTimeslot(bodyData));
+
+        if (isError) {
+            setClientMessage(message)
+        }
         
     }
 
@@ -103,7 +107,7 @@ function TimeslotForm() {
         return <Spinner />
     }
     return (
-    <section className="addTimeslotFormBox">
+    <section className="formBox">
         <label htmlFor="timeslotForm">Add a Timeslot</label>
         <form onSubmit={onSubmit} name="timeslotForm">
                 <label htmlFor="startHours">Start:</label>
@@ -199,7 +203,7 @@ function TimeslotForm() {
                     })}
                 </select>
                 <div className="errorbox">
-                    {clientMessage || message}
+                    {clientMessage}
                 </div>
                 <button type="submit" className="btn">Add</button>
         </form>

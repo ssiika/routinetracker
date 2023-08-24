@@ -18,7 +18,7 @@ const addActivity = asyncHandler(async (req: RequestWUser, res: Response) => {
         throw new Error('Request must have a name, start date and color')
     }
 
-    const activityAlreadyExists = await Activity.findOne({userId, name})
+    const activityAlreadyExists = await Activity.findOne({user: userId, name})
 
     if (activityAlreadyExists) {
         res.status(400)
