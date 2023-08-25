@@ -468,6 +468,20 @@ tr:nth-child(2n) td {
   position: absolute;
 }
 
+.close {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  right: 3px;
+  cursor: pointer;
+  border: none;
+  font-size: 10px;
+  color: white;
+  font-weight: bold;
+  background: none;
+  display: none;
+}
+
 .activityLegend {
   display: grid;
   justify-content: center;

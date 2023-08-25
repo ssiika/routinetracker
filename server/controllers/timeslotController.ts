@@ -39,7 +39,7 @@ const deleteTimeslot = asyncHandler(async (req: RequestWUser, res: Response) => 
 
     const [activityid, timeslotid] = req.params.id.split('-')
 
-    const deletedResponse = await Activity.updateOne({"_id": activityid, "user": req.user._id}, {$pull: {"timeslots": {_id: timeslotid}}})
+    const deletedResponse = await Activity.findOneAndUpdate({"_id": activityid, "user": req.user._id}, {$pull: {"timeslots": {_id: timeslotid}}}, {returnDocument: 'after'})
 
     res.status(200).json(deletedResponse)
 })

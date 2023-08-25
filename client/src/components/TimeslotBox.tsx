@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { Timeslot, Activity } from '../types'
+import { useAppDispatch } from '../app/hooks';
 import { start } from 'repl';
+import { deleteTimeslot } from '../features/activities/activitySlice';
 
 function TimeslotBox({timeslot, activity}: {timeslot: Timeslot, activity: Activity}) {
+    const dispatch = useAppDispatch();
     const [hover, setHover] = useState(false);
 
     const calculateValues = (start: string, end: string): { startDiv: number, divSpan: number } => {
@@ -32,6 +35,10 @@ function TimeslotBox({timeslot, activity}: {timeslot: Timeslot, activity: Activi
     const onLeave = () => {
         setHover(false);
     }
+
+    const handleDeleteClick = () => {
+        dispatch(deleteTimeslot(`${activity._id}-${timeslot._id}`))
+    }
     
     return (
             <div 
@@ -46,6 +53,10 @@ function TimeslotBox({timeslot, activity}: {timeslot: Timeslot, activity: Activi
                     : ''
                     }
                 </span>
+                <button 
+                onClick={handleDeleteClick} 
+                className={hover ? "close visible" : "close"}
+                >X</button>
             </div>
     )
 }

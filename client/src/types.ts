@@ -33,6 +33,7 @@ export interface activityState {
 }
 
 export interface Timeslot {
+    _id: string,
     day: string,
     startTime: string,
     endTime: string
