@@ -61,9 +61,9 @@ function ActivityForm() {
                   id="name"
                 />
                 <div className="colorBox" style={{backgroundColor: `rgb(${formColor})`}} onClick={() => setIsVisible(!isVisible)}>
-                  <div className={isVisible ? "colorDropdown visible" : "colorDropdown"}>{colorList.map((color) => {
+                  <div className={isVisible ? "colorDropdown visible" : "colorDropdown"}>{colorList.map((color, index) => {
                     return (
-                      <div className="colorBox" style={{backgroundColor: `rgb(${color})`}} onClick={() => {setFormColor(color); setIsVisible(!isVisible)}}></div>
+                      <div className="colorBox" key={`colorBox-${index}`} style={{backgroundColor: `rgb(${color})`}} onClick={() => {setFormColor(color); setIsVisible(!isVisible)}}></div>
                     )
                     })}
                   </div>

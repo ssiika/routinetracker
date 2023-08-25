@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Timeslot, Activity } from '../types'
 import { useAppDispatch } from '../app/hooks';
-import { start } from 'repl';
 import { deleteTimeslot } from '../features/activities/activitySlice';
 
 function TimeslotBox({timeslot, activity}: {timeslot: Timeslot, activity: Activity}) {

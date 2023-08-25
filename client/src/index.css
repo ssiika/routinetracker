@@ -161,7 +161,9 @@ a {
 
 ul {
   list-style-type: none;
-  display: grid;
+}
+
+.userInfo {
   grid-template-columns: auto auto;
   gap: 40px;
   font-size: 15px;
@@ -374,6 +376,7 @@ h1 {
 }
 
 .dropdown {
+  list-style-type: none;
   display: none;
   height: 150px;
   position: absolute;
@@ -386,6 +389,10 @@ h1 {
   right: 10px;
   background-color: white;
   z-index: 1;
+}
+
+.dropdown  li {
+  display: block;
 }
 
 .colorBox {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import type { RootState } from '../app/store';
 import {useSelector} from 'react-redux';
 import TimeslotBox from './TimeslotBox';
@@ -12,7 +12,7 @@ function ScheduleOverlay() {
                 return (
                 activity.timeslots.map((timeslot) => {
                     return (
-                    <TimeslotBox timeslot={timeslot} activity={activity} />
+                    <TimeslotBox key={timeslot._id }timeslot={timeslot} activity={activity} />
                     )
                 })
                 )

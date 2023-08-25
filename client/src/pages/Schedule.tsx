@@ -5,7 +5,6 @@ import ScheduleOverlay from '../components/ScheduleOverlay'
 import {useSelector} from 'react-redux';
 import type { RootState } from '../app/store';
 import ActivityForm from '../components/ActivityForm';
-import Spinner from '../components/Spinner';
 
 function Schedule() {
   const {userActivityList} = useSelector((state: RootState) => state.activities);
@@ -19,16 +18,16 @@ function Schedule() {
         <div className='content'>
           <div className="schedule">
             <div className="timeLegend">
-              {times.map((time) => {
+              {times.map((time, index) => {
                 return (
-                  <div className="timeLegendBox">{time}</div>
+                  <div className="timeLegendBox" key={index}>{time}</div>
                 )
               })}
             </div>
             <ScheduleOverlay />
             {days.map((day, index) => {
               return (
-              <div className="dayBox">
+              <div className="dayBox" key={`dayBox-${index}`}>
                 <table className='dayTable'>
                   <thead>
                   </thead>
@@ -37,7 +36,7 @@ function Schedule() {
                     let tableArray = [];
                     for (let i = 0; i < 48; i++) {
                       tableArray.push(
-                        <tr>
+                        <tr key={`tableCell-${i}`}>
                           <td id={`${index}-${i}`} className='timeslot'></td>
                         </tr>
                       )
@@ -55,9 +54,9 @@ function Schedule() {
           })}
           </div>
           <div className="activityLegend">
-            {userActivityList.map((activity) => {
+            {userActivityList.map((activity, index) => {
               return (
-                <div className="legendBox">
+                <div className="legendBox" key={`activityLegend-${index}`}>
                   <div className="colorBox" style={{backgroundColor: `rgb(${activity.color})`}}></div>
                   <div className="legendName">{activity.name}</div>
                 </div>

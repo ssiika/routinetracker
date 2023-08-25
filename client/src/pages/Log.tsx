@@ -48,12 +48,16 @@ function Log() {
             <div className='log-activities'>
               {userActivityList.length > 0 ? (
                 <>
-                  {userActivityList.map(function(activity) {
+                  {userActivityList.map(function(activity, index) {
                     const activityRecords = userRecordList.filter((record) => 
                       record.activity_id === activity._id
                       )
                       return (
-                      <div className="activitybox" style={{border: `3px solid rgb(${activity.color})`}}>
+                      <div 
+                        className="activitybox" 
+                        style={{border: `3px solid rgb(${activity.color})`}}
+                        key={`logBox-${index}`}
+                      >
                             <div className="activityHeader" key={activity._id}>{activity.name}</div>
                               <Calendar records={activityRecords} calendarClick={calendarClick} activityData={activity} />
                             </div>

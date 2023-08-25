@@ -70,9 +70,14 @@ function Colors() {
                   {activity.name}
                 </div>
                 <div className="colorBox" style={{backgroundColor: `rgb(${activity.color})`}} onClick={dropdownToggle}>
-                  <div className="colorDropdown">{colorList.map((color) => {
+                  <div className="colorDropdown">{colorList.map((color, index) => {
                     return (
-                      <div className="colorBox" style={{backgroundColor: `rgb(${color})`}} onClick={() => onColorClick(activity._id, color)}></div>
+                      <div 
+                        className="colorBox" 
+                        style={{backgroundColor: `rgb(${color})`}} 
+                        onClick={() => onColorClick(activity._id, color)}
+                        key={`${activity._id}-color${index}`}
+                      ></div>
                     )
                     })}
                   </div>

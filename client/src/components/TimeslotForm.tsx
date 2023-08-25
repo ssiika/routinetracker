@@ -122,7 +122,7 @@ function TimeslotForm() {
                         for (let i = 0; i < 24; i++) {
                             let hour = `${Math.floor(i / 10)}${i % 10}`
                              hoursArray.push(
-                                <option value={hour}>{hour}</option>
+                                <option value={hour} key={`sHOpt-${i}`}>{hour}</option>
                             )
                         }
                         return hoursArray
@@ -151,7 +151,7 @@ function TimeslotForm() {
                             let hour = `${Math.floor(i / 10)}${i % 10}`
                             if (hour >= startHours) {
                                 hoursArray.push(
-                                    <option value={hour}>{hour}</option>
+                                    <option value={hour} key={`eHOpt-${i}`}>{hour}</option>
                                 )
                             }     
                         }
@@ -191,14 +191,14 @@ function TimeslotForm() {
                 <select name="daySelect" id="daySelect">
                     {days.map((day, index) => {
                         return (
-                            <option value={index}>{day}</option>
+                            <option value={index} key={`dayOption-${index}`}>{day}</option>
                         )
                     })}
                 </select>
                 <select name="activitySelect" id="activitySelect">
-                    {userActivityList.map((activity) => {
+                    {userActivityList.map((activity, index) => {
                         return (
-                            <option value={activity._id}>{activity.name}</option>
+                            <option value={activity._id} key={`activityOption-${index}`}>{activity.name}</option>
                         )
                     })}
                 </select>

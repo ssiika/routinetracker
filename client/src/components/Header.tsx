@@ -29,7 +29,7 @@ function Header() {
         <div className="logo">
             <Link to='/'>Routine Tracker</Link>
         </div>
-        <ul>
+        <ul className='userInfo'>
             {user ? (
                 <>
                     <li>
@@ -38,19 +38,19 @@ function Header() {
                     <li>
                         <div className="userIcon" onClick={menuToggle}>
                             
-                                <div className={dropdownActive ? "dropdown visible" : "dropdown"}>
-                                    <li>
-                                        <Link to='/colors'>
-                                            <FaCog />Color settings
-                                        </Link>
-                                        
-                                    </li>
-                                    <li>
-                                        <button className='logout' onClick={onLogout}>
-                                            <FaSignOutAlt /> Logout
-                                        </button>
-                                    </li>
-                                </div> 
+                                <ul className={dropdownActive ? "dropdown visible" : "dropdown"}>
+                                        <li>
+                                            <Link to='/colors'>
+                                                <FaCog />Color settings
+                                            </Link>
+
+                                        </li>
+                                        <li>
+                                            <button className='logout' onClick={onLogout}>
+                                                <FaSignOutAlt /> Logout
+                                            </button>
+                                        </li>                                 
+                                </ul> 
                         </div>
                     </li>
                 </>
