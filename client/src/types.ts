@@ -51,3 +51,11 @@ export interface RecordUpdateData {
     activity_name: string,
     day: Date | string
 }
+
+export interface GraphData {
+    year: number,
+    // Month should be month array index
+    month: number,
+    total: number,
+    
+}

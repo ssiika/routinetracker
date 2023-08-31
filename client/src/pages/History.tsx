@@ -7,17 +7,11 @@ import { getRecords, recordReset } from '../features/records/recordSlice';
 import { getActivities, activityReset } from '../features/activities/activitySlice';
 import type { RootState } from '../app/store';
 import Spinner from '../components/Spinner';
-import { Record } from '../types';
+import { Record, Activity, GraphData } from '../types';
+import { create } from 'domain';
 
 function History() {
 
-  interface MonthGroupOutput {
-    year: number,
-    // Month should be month array index
-    month: number,
-    total: number,
-  }
-  
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -39,6 +33,8 @@ function History() {
   }
 
   const [recordData, setRecordData] = useState<Record[] | null>(null)
+  const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null)
+  const [yearFilter, setYearFilter] =useState(new Date().getFullYear().toString())
 
   const getValuesFromDate = (date: Date | string): {year: number, month: number} => {
     // Sanitise dates
@@ -51,9 +47,9 @@ function History() {
     return {year, month};
   }
 
-  const groupByMonth = (array: Record[]): MonthGroupOutput[] => {
+  const groupByMonth = (array: Record[]): GraphData[] => {
     
-    let outputArray: MonthGroupOutput[] = [];
+    let outputArray: GraphData[] = [];
 
     // Loop through array, check if output contains relevant year and month, if not create new item to push to array
     for (let i = 0; i < array.length; i++) {
@@ -80,14 +76,46 @@ function History() {
  
   }
 
+  const createYearSelectOptions = (start: Date | string): JSX.Element[] => {
+    let outputArray: JSX.Element[] = [];
+    if (start instanceof Date) {
+      start = start.toLocaleDateString()
+    }
+    const startInt = parseInt(start.slice(0, 4))
+    const currentYear = new Date().getFullYear()
+
+    for (let i = currentYear; i >= startInt; i--) {
+      outputArray.push(
+        <option value={i} key={`yearOption-${i}`}>{i}</option>
+      )
+    } 
+
+    return outputArray
+  }
+
+  const onYearChange = (e: SyntheticEvent) => {
+    const target = e.target as typeof e.target & {
+      value: string
+    }
+
+    setYearFilter(target.value)
+  }
+
   const onActivityChange = (e: SyntheticEvent) => {
     const target = e.target as typeof e.target & {
       value: string
     }
 
+    const activity = userActivityList.find((activity) => activity._id === target.value)
+    if (activity) {
+      setSelectedActivity(activity)
+    }
+
     const data = userRecordList.filter((record) => record.activity_id === target.value).sort(sortCompare)
     setRecordData(data)
   }
+
+  
 
   useEffect(() => {
     if (!user) {
@@ -120,14 +148,38 @@ function History() {
               )
             })}
           </select>
+          <label htmlFor="yearSelect">Year: </label>
+          <select name="yearSelect" id="yearSelect" onChange={(e) => onYearChange(e)}>
+            {(function () {
+              if (!selectedActivity) {
+                if (userActivityList.length !== 0) {
+                  
+                  const optionsArray = createYearSelectOptions(userActivityList[0].start)
+                  return optionsArray
+                }
+                return <></>
+              }
+              const optionsArray = createYearSelectOptions(selectedActivity.start)
+              return optionsArray
+              })()
+            } 
+          </select>
           <div className="graph">
             {recordData && recordData.length !== 0 ? (
               <>
-                {recordData.map((record) => {
-                  return (
-                    <div key={record._id}>{`${record.time} on ${record.day}`}</div>
-                  )
-                })}
+                {(function () {
+                    let recordArray: JSX.Element[] = [];
+                    const sortedArray = groupByMonth(recordData)
+                    sortedArray.map((group) => {
+                      // Average to 2 decimal places
+                      const avg = Math.round((group.total / months[group.month][1])* 100) / 100
+                      recordArray.push(
+                        <div key={`${group.year}-${group.month}`}>{`${group.year}-${months[group.month][0]}: total ${group.total} average ${avg} minutes`}</div>
+                      )
+                    })
+                    return recordArray
+                    })()
+                } 
               </>
               ) : 
               (<>
