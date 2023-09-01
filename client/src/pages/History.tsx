@@ -7,7 +7,8 @@ import { getRecords, recordReset } from '../features/records/recordSlice';
 import { getActivities, activityReset } from '../features/activities/activitySlice';
 import type { RootState } from '../app/store';
 import Spinner from '../components/Spinner';
-import { Record, Activity, GraphData } from '../types';
+import Graph from '../components/Graph';
+import { Record, Activity, GroupedData } from '../types';
 import { create } from 'domain';
 
 function History() {
@@ -34,7 +35,7 @@ function History() {
 
   const [recordData, setRecordData] = useState<Record[] | null>(null)
   const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null)
-  const [yearFilter, setYearFilter] =useState(new Date().getFullYear().toString())
+  const [yearFilter, setYearFilter] = useState(new Date().getFullYear().toString())
 
   const getValuesFromDate = (date: Date | string): {year: number, month: number} => {
     // Sanitise dates
@@ -47,9 +48,9 @@ function History() {
     return {year, month};
   }
 
-  const groupByMonth = (array: Record[]): GraphData[] => {
+  const groupByMonth = (array: Record[]): GroupedData[] => {
     
-    let outputArray: GraphData[] = [];
+    let outputArray: GroupedData[] = [];
 
     // Loop through array, check if output contains relevant year and month, if not create new item to push to array
     for (let i = 0; i < array.length; i++) {
@@ -60,13 +61,15 @@ function History() {
         outputArray.push({
           year,
           month,
-          total: array[i].time
+          total: array[i].time,
+          avg: Math.round(((array[i].time / month) * 100) / 100)
         })
       } else {
         // Entry already exists. Must append time to total
         outputArray[groupExists] = {
           ...outputArray[groupExists],
-          total: outputArray[groupExists].total + array[i].time
+          total: outputArray[groupExists].total + array[i].time,
+          avg: Math.round((((outputArray[groupExists].total + array[i].time) / month) * 100) / 100)
         }
       }
     }
@@ -168,33 +171,25 @@ function History() {
             {recordData && recordData.length !== 0 ? (
               <>
                 {(function () {
-                    let recordArray: JSX.Element[] = [];
                     const sortedArray = groupByMonth(recordData)
-                    sortedArray.map((group) => {
-                      // Average to 2 decimal places
-                      const avg = Math.round((group.total / months[group.month][1])* 100) / 100
-                      recordArray.push(
-                        <div key={`${group.year}-${group.month}`}>{`${group.year}-${months[group.month][0]}: total ${group.total} average ${avg} minutes`}</div>
-                      )
-                    })
-                    return recordArray
+
+                    return <Graph 
+                      data={sortedArray.filter((data) => data.year === parseInt(yearFilter))}
+                      color={selectedActivity?.color ? selectedActivity.color : '0, 0, 0'}
+                    />
                     })()
                 } 
               </>
               ) : 
               (<>
                 {(function () {
-                  let recordArray: JSX.Element[] = [];
                   const defaultArray = userRecordList.filter((record) => record.activity_id === userActivityList[0]?._id).sort(sortCompare)
                   const sortedArray = groupByMonth(defaultArray)
-                  sortedArray.map((group) => {
-                    // Average to 2 decimal places
-                    const avg = Math.round((group.total / months[group.month][1])* 100) / 100
-                    recordArray.push(
-                      <div key={`${group.year}-${group.month}`}>{`${group.year}-${months[group.month][0]}: total ${group.total} average ${avg} minutes`}</div>
-                    )
-                  })
-                  return recordArray
+                  
+                  return <Graph 
+                    data={sortedArray.filter((data) => data.year === parseInt(yearFilter))}
+                    color={selectedActivity?.color ? selectedActivity.color : '0, 0, 0'}
+                  />
                   })()
                 } 
               </>

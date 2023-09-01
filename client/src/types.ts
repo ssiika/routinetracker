@@ -52,10 +52,15 @@ export interface RecordUpdateData {
     day: Date | string
 }
 
-export interface GraphData {
+export interface GroupedData {
     year: number,
     // Month should be month array index
     month: number,
     total: number,
-    
+    avg: number
+}
+
+export interface GraphData {
+    total: number, 
+    avg: number
 }
