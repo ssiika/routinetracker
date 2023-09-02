@@ -36,6 +36,7 @@ function History() {
   const [recordData, setRecordData] = useState<Record[] | null>(null)
   const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null)
   const [yearFilter, setYearFilter] = useState(new Date().getFullYear().toString())
+  const [yAxisFilter, setYAxisFilter] = useState('total')
 
   const getValuesFromDate = (date: Date | string): {year: number, month: number} => {
     // Sanitise dates
@@ -62,14 +63,14 @@ function History() {
           year,
           month,
           total: array[i].time,
-          avg: Math.round(((array[i].time / month) * 100) / 100)
+          avg: Math.round(((array[i].time / months[month][1]) * 100) / 100)
         })
       } else {
         // Entry already exists. Must append time to total
         outputArray[groupExists] = {
           ...outputArray[groupExists],
           total: outputArray[groupExists].total + array[i].time,
-          avg: Math.round((((outputArray[groupExists].total + array[i].time) / month) * 100) / 100)
+          avg: Math.round((((outputArray[groupExists].total + array[i].time) / months[month][1]) * 100) / 100)
         }
       }
     }
@@ -104,6 +105,14 @@ function History() {
     setYearFilter(target.value)
   }
 
+  const onYAxisChange = (e: SyntheticEvent) => {
+    const target = e.target as typeof e.target & {
+      value: string
+    }
+
+    setYAxisFilter(target.value)
+  }
+
   const onActivityChange = (e: SyntheticEvent) => {
     const target = e.target as typeof e.target & {
       value: string
@@ -116,6 +125,7 @@ function History() {
 
     const data = userRecordList.filter((record) => record.activity_id === target.value).sort(sortCompare)
     setRecordData(data)
+    setYearFilter(new Date().getFullYear().toString())
   }
 
   
@@ -151,7 +161,6 @@ function History() {
               )
             })}
           </select>
-          <label htmlFor="yearSelect">Year: </label>
           <select name="yearSelect" id="yearSelect" onChange={(e) => onYearChange(e)}>
             {(function () {
               if (!selectedActivity) {
@@ -167,15 +176,19 @@ function History() {
               })()
             } 
           </select>
+          <select name="yAxisSelect" id="yAxisSelect" onChange={(e) => onYAxisChange(e)}>
+            <option value="total">Total</option>
+            <option value="avg">Monthly Average</option>
+          </select>
           <div className="graph">
-            {recordData && recordData.length !== 0 ? (
+            {recordData ? (
               <>
                 {(function () {
                     const sortedArray = groupByMonth(recordData)
-
                     return <Graph 
                       data={sortedArray.filter((data) => data.year === parseInt(yearFilter))}
                       color={selectedActivity?.color ? selectedActivity.color : '0, 0, 0'}
+                      yAxisFilter={yAxisFilter}
                     />
                     })()
                 } 
@@ -185,10 +198,20 @@ function History() {
                 {(function () {
                   const defaultArray = userRecordList.filter((record) => record.activity_id === userActivityList[0]?._id).sort(sortCompare)
                   const sortedArray = groupByMonth(defaultArray)
-                  
+
+                  let color: string;
+                  if (selectedActivity) {
+                    color = selectedActivity.color
+                  } else if (userActivityList.length !== 0) {
+                    color = userActivityList[0].color
+                  } else {
+                    color = '0, 0, 0'
+                  }
+
                   return <Graph 
                     data={sortedArray.filter((data) => data.year === parseInt(yearFilter))}
-                    color={selectedActivity?.color ? selectedActivity.color : '0, 0, 0'}
+                    color={color}
+                    yAxisFilter={yAxisFilter}
                   />
                   })()
                 } 

@@ -3,7 +3,9 @@ import { GroupedData, GraphData } from '../types'
 import { Bar } from 'react-chartjs-2'
 import 'chart.js/auto'
 
-function Graph({data, color}: {data: GroupedData[], color: string}) {
+function Graph({data, color, yAxisFilter}: {data: GroupedData[], color: string, yAxisFilter: string}) {
+
+    
 
     const months: [string, number][] = [['Jan', 31], ['Feb', 28], ['Mar', 31], ['Apr', 30], ['May', 31], ['Jun', 30], 
     ['Jul', 31], ['Aug', 31], ['Sep', 30], ['Oct', 31], ['Nov', 30], ['Dec', 31]]
@@ -21,15 +23,19 @@ function Graph({data, color}: {data: GroupedData[], color: string}) {
     const formattedData = {
         labels: months.map((month) => month[0]),
         datasets: [{
-            label: "Time spent",
-            data: graphData.map((obj) => obj.total)
+            label: "Time spent (minutes)",
+            data: graphData.map((obj) => {
+                if (yAxisFilter === 'total') return obj.total
+                else if (yAxisFilter === 'avg') return obj.avg
+            }),
+            backgroundColor: [`rgb(${color})`]
         }]
     }
 
     
 
     return (
-        <div>
+        <div className='graphDiv'>
             <Bar data={formattedData} />
         </div>
     )

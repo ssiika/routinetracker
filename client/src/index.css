@@ -503,6 +503,10 @@ tr:nth-child(2n) td {
   align-items: center;
 }
 
+.graphDiv {
+  width: 700px;
+}
+
 .errorbox {
   color: red;
   font-size: 15px;
