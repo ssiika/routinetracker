@@ -503,8 +503,34 @@ tr:nth-child(2n) td {
   align-items: center;
 }
 
+.filterBox {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, auto);
+  width: 1300px;
+}
+
+.graphFilter:nth-child(2) {
+  margin-left: auto;
+}
+
+.graphFilter {
+  background-color: rgb(252, 247, 241);
+  border: none;
+  padding: 8px 10px;
+  border-radius: 2px;
+  width: 200px;
+  font-size: 15px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.smallFilter {
+  width: 100px;
+}
+
 .graphDiv {
-  width: 700px;
+  width: 1000px;
 }
 
 .errorbox {

@@ -18,6 +18,10 @@ function Sidebar() {
             <Link to='/history'>
                 History
             </Link>
+        </li><li className='sidebarLink'>
+            <Link to='/guide'>
+                Guide
+            </Link>
         </li>
     </div>
   )

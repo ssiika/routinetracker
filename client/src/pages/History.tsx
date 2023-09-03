@@ -153,33 +153,34 @@ function History() {
     <>
         <Sidebar />
         <div className='content'>
-          <label htmlFor="histActSel">Select Activity: </label>
-          <select name="histActSel" id="histActSel" onChange={(e) => onActivityChange(e)}>
-            {userActivityList.map((activity, index) => {
-              return (
-                <option value={activity._id} key={`activityOption-${index}`}>{activity.name}</option>
-              )
-            })}
-          </select>
-          <select name="yearSelect" id="yearSelect" onChange={(e) => onYearChange(e)}>
-            {(function () {
-              if (!selectedActivity) {
-                if (userActivityList.length !== 0) {
-                  
-                  const optionsArray = createYearSelectOptions(userActivityList[0].start)
-                  return optionsArray
+          <div className="filterBox">
+            <select className="graphFilter" name="histActSel" id="histActSel" onChange={(e) => onActivityChange(e)}>
+              {userActivityList.map((activity, index) => {
+                return (
+                  <option value={activity._id} key={`activityOption-${index}`}>{activity.name}</option>
+                )
+              })}
+            </select>
+            <select className="smallFilter graphFilter" name="yearSelect" id="yearSelect" onChange={(e) => onYearChange(e)}>
+              {(function () {
+                if (!selectedActivity) {
+                  if (userActivityList.length !== 0) {
+
+                    const optionsArray = createYearSelectOptions(userActivityList[0].start)
+                    return optionsArray
+                  }
+                  return <></>
                 }
-                return <></>
-              }
-              const optionsArray = createYearSelectOptions(selectedActivity.start)
-              return optionsArray
-              })()
-            } 
-          </select>
-          <select name="yAxisSelect" id="yAxisSelect" onChange={(e) => onYAxisChange(e)}>
-            <option value="total">Total</option>
-            <option value="avg">Monthly Average</option>
-          </select>
+                const optionsArray = createYearSelectOptions(selectedActivity.start)
+                return optionsArray
+                })()
+              } 
+            </select>
+            <select className="graphFilter smallFilter" name="yAxisSelect" id="yAxisSelect" onChange={(e) => onYAxisChange(e)}>
+              <option value="total">Total</option>
+              <option value="avg">Daily Avg</option>
+            </select>
+          </div>        
           <div className="graph">
             {recordData ? (
               <>
