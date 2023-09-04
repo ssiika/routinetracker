@@ -13,21 +13,36 @@ code {
 }
 
 .container {
-  margin-left: 50px;
-  margin-top: 50px;
   display: grid;
-  grid-template-columns: 150px auto;
+  grid-template-columns: 150px calc(100vw - 150px);
   grid-template-rows: 170px auto;
   
 }
 
 .sidebar {
-  height: 500px;
-  width: 100px;
+  height: calc(100vh - 170px);
+  width: 200px;
+  height: 100%;
   position: absolute;
-  margin-top: 150px;
-  border: 1px solid black;
-  background-color: white;
+  border-right: 1px solid black;
+  box-shadow: 2px 2px rgb(240, 240, 240);
+  box-sizing: border-box;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding-top: 170px;
+  padding-left: 40px;
+}
+
+.sidebarLink {
+  list-style: none;
+  height: 30px;
+  padding: 8px 5px 5px 10px;
+  vertical-align: center;
+}
+
+.sidebarSelected {
+  background-color: #dfdede;
 }
 
 .form {
@@ -126,11 +141,17 @@ code {
 .header {
   grid-area: 1 / 1 / 2 / 3;
   display: grid;
-  grid-template-columns: 650px 650px;
-  justify-self: center;
-  justify-items: center;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  margin-bottom: 50px;
   align-items: center;
-  margin-bottom: 100px;
+  border-bottom: 1px solid black;
+  box-sizing: border-box;
+  z-index: 1;
+  width: 100vw;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  background-color: white;
 }
 
 .logo, .altlogo {
