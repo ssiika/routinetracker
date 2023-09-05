@@ -448,6 +448,17 @@ h1 {
   left: 25px;
 }
 
+.activityDelete {
+  background-color: lightcoral;
+  border: 2px solid rgb(187, 97, 97);
+  border-radius: 2px;
+  color: white;
+}
+
+.deleteHover {
+  background-color: rgb(187, 97, 97);
+}
+
 .schedule {
   display: grid; 
   grid-template-columns: 50px repeat(auto-fill, 150px);
