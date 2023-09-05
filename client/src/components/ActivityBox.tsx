@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Activity } from '../types'
 import { useAppDispatch } from '../app/hooks';
 import { updateActivity } from '../features/activities/activitySlice'
+import DeleteConfirm from './DeleteConfirm';
 
 function ActivityBox({activity}: {activity: Activity}) {
     const dispatch = useAppDispatch();
+
+    const [deletePending, setDeletePending] = useState<Activity | null>(null)
 
     const onEnter = (e: HTMLButtonElement) => {
         e.classList.add('deleteHover')
@@ -12,6 +15,10 @@ function ActivityBox({activity}: {activity: Activity}) {
     
     const onLeave = (e: HTMLButtonElement) => {
         e.classList.remove('deleteHover')
+    } 
+
+    const resetDeletePending = () => {
+        setDeletePending(null)
     }
 
     const onColorClick = (id: string, color: string) => {
@@ -70,7 +77,13 @@ function ActivityBox({activity}: {activity: Activity}) {
                 className="activityDelete" 
                 onMouseEnter={(e) => onEnter(e.target as HTMLButtonElement)}
                 onMouseLeave={(e) => onLeave(e.target as HTMLButtonElement)}
+                onClick={() => setDeletePending(activity)}
             >Delete</button>
+            {deletePending && 
+            <DeleteConfirm 
+                resetDeletePending={resetDeletePending} 
+                activity={deletePending} 
+            />}
         </div>
   )
 }
