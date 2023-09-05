@@ -22,23 +22,30 @@ code {
 .sidebar {
   height: calc(100vh - 170px);
   width: 200px;
-  height: 100%;
-  position: absolute;
+  height: 100vh;
+  position: fixed;
   border-right: 1px solid black;
   box-shadow: 2px 2px rgb(240, 240, 240);
+  background-color: white;
   box-sizing: border-box;
   display: grid;
   align-content: start;
   gap: 10px;
   padding-top: 170px;
   padding-left: 40px;
+  overflow: auto;
+}
+
+li {
+  list-style: none;
 }
 
 .sidebarLink {
-  list-style: none;
-  height: 30px;
-  padding: 8px 5px 5px 10px;
-  vertical-align: center;
+  height: 45px;
+  padding: 10px 5px 10px 10px;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
 }
 
 .sidebarSelected {
@@ -143,7 +150,6 @@ code {
   display: grid;
   grid-template-columns: auto auto;
   justify-content: space-between;
-  margin-bottom: 50px;
   align-items: center;
   border-bottom: 1px solid black;
   box-sizing: border-box;
@@ -151,7 +157,10 @@ code {
   width: 100vw;
   padding-left: 5vw;
   padding-right: 5vw;
+  padding-bottom: 30px;
+  padding-top: 20px;
   background-color: white;
+  position: fixed;
 }
 
 .logo, .altlogo {
@@ -399,7 +408,7 @@ h1 {
 .dropdown {
   list-style-type: none;
   display: none;
-  height: 150px;
+  height: 75px;
   position: absolute;
   box-sizing: border-box;
   padding: 20px;

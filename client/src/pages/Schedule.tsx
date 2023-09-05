@@ -64,7 +64,6 @@ function Schedule() {
               )
             })}
           </div>
-          <ActivityForm />
           <TimeslotForm />
         </div>
     </>

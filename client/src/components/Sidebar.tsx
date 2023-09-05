@@ -12,34 +12,53 @@ function Sidebar() {
 
   return (
     <div className='sidebar'>
-        <li className='sidebarLink' 
-            onMouseEnter={(e) => onEnter(e.target as HTMLLIElement)}
-            onMouseLeave={(e) => onLeave(e.target as HTMLLIElement)}
-        >
-            <Link to='/schedule'>
+        <li>
+            <Link 
+                to='/schedule'
+                className='sidebarLink'
+                onMouseEnter={(e) => onEnter(e.target as HTMLLIElement)}
+                onMouseLeave={(e) => onLeave(e.target as HTMLLIElement)}
+            >
                 Schedule
             </Link>
         </li>
-        <li className='sidebarLink' 
-            onMouseEnter={(e) => onEnter(e.target as HTMLLIElement)}
-            onMouseLeave={(e) => onLeave(e.target as HTMLLIElement)}
-        >
-            <Link to='/log'>
+        <li>
+            <Link 
+                to='/log'
+                className='sidebarLink'
+                onMouseEnter={(e) => onEnter(e.target as HTMLLIElement)}
+                onMouseLeave={(e) => onLeave(e.target as HTMLLIElement)}
+            >
                 Log
             </Link>
         </li>   
-        <li className='sidebarLink' 
-            onMouseEnter={(e) => onEnter(e.target as HTMLLIElement)}
-            onMouseLeave={(e) => onLeave(e.target as HTMLLIElement)}
-        >
-            <Link to='/history'>
+        <li>
+            <Link
+                to='/history'
+                className='sidebarLink'
+                onMouseEnter={(e) => onEnter(e.target as HTMLLIElement)}
+                onMouseLeave={(e) => onLeave(e.target as HTMLLIElement)}
+            >
                 History
             </Link>
-        </li><li className='sidebarLink' 
-            onMouseEnter={(e) => onEnter(e.target as HTMLLIElement)}
-            onMouseLeave={(e) => onLeave(e.target as HTMLLIElement)}
-        >
-            <Link to='/guide'>
+        </li>
+        <li>
+            <Link 
+                to='/activities'
+                className='sidebarLink'
+                onMouseEnter={(e) => onEnter(e.target as HTMLLIElement)}
+                onMouseLeave={(e) => onLeave(e.target as HTMLLIElement)}
+            >
+                Activities
+            </Link>
+        </li>
+        <li>
+            <Link 
+                to='/guide' 
+                className='sidebarLink'
+                onMouseEnter={(e) => onEnter(e.target as HTMLLIElement)}
+                onMouseLeave={(e) => onLeave(e.target as HTMLLIElement)}
+            >
                 Guide
             </Link>
         </li>

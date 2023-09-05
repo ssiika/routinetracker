@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from 'react'
 import {useSelector} from 'react-redux';
 import type { RootState } from '../app/store';
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from '../app/hooks';
 import Sidebar from '../components/Sidebar'
+import Spinner from '../components/Spinner';
+import ActivityForm from '../components/ActivityForm'
 import { getActivities, updateActivity, activityReset } from '../features/activities/activitySlice'
 
-function Colors() {
+function Activities() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const {userActivityList} = useSelector((state: RootState) => state.activities);
-  const {user} = useSelector((state: RootState) => state.auth);
+  const {userActivityList, isLoading: activityLoading} = useSelector((state: RootState) => state.activities);
+  const {user, isLoading: userLoading} = useSelector((state: RootState) => state.auth);
 
   const dropdownToggle = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -23,6 +25,7 @@ function Colors() {
   const onColorClick = (id: string, color: string) => {
     dispatch(updateActivity({id, color}))
   }
+
 
   const colorList = [
     // red
@@ -59,10 +62,15 @@ function Colors() {
     }
   }, [user, dispatch, navigate])
 
+  if (userLoading || activityLoading) {
+    return <Spinner />
+  }
+
   return (
     <>
         <Sidebar />
         <div className='content'>
+          <div className="activityList">
           {userActivityList.map((activity) => {
             return (
               <div className="colorSettingsBox" key={activity._id}>
@@ -85,10 +93,11 @@ function Colors() {
               </div>
             )
           })}
+          </div>
+          <ActivityForm />
         </div>
-    </>
-    
+    </>   
   )
 }
 
-export default Colors
+export default Activities

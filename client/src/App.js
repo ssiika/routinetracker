@@ -6,8 +6,8 @@ import Header from './components/Header.tsx';
 import Log from './pages/Log.tsx';
 import Schedule from './pages/Schedule.tsx'
 import History from './pages/History.tsx'
-import Colors from './pages/Colors.tsx';
 import Guide from './pages/Guide.tsx';
+import Activities from './pages/Activities.tsx';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           <Header />
           <Routes>
             <Route path='/' element={ <Navigate to="/schedule" /> }/>
-            <Route path='/colors' element={<Colors />} />
+            <Route path='/activities' element={<Activities />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/log' element={<Log />} />

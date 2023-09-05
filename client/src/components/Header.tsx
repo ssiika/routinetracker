@@ -40,12 +40,6 @@ function Header() {
                             
                                 <ul className={dropdownActive ? "dropdown visible" : "dropdown"}>
                                         <li>
-                                            <Link to='/colors'>
-                                                <FaCog />Color settings
-                                            </Link>
-
-                                        </li>
-                                        <li>
                                             <button className='logout' onClick={onLogout}>
                                                 <FaSignOutAlt /> Logout
                                             </button>
