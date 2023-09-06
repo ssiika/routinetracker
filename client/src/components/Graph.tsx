@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { GroupedData, GraphData } from '../types'
 import { Bar } from 'react-chartjs-2'
 import 'chart.js/auto'
@@ -26,7 +26,7 @@ function Graph({data, color, yAxisFilter}: {data: GroupedData[], color: string, 
             label: "Time spent (minutes)",
             data: graphData.map((obj) => {
                 if (yAxisFilter === 'total') return obj.total
-                else if (yAxisFilter === 'avg') return obj.avg
+                else /* yAxisFilter === 'avg' */ return obj.avg
             }),
             backgroundColor: [`rgb(${color})`]
         }]

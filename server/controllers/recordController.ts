@@ -45,9 +45,12 @@ const updateRecord = asyncHandler(async (req: RequestWUser, res: Response) => {
 })
 
 const deleteRecord = asyncHandler(async (req: RequestWUser, res: Response) => {
-    const deletedResponse = await Record.deleteOne({"_id": req.params.id, "user": req.user._id})
+    // Delete all records given an activity id
+    const deletedResponse = await Record.deleteMany({"activity_id": req.params.id, "user": req.user._id})
 
-    res.status(200).json(deletedResponse)
+    // Get updated records to add to state
+    const newRecords = await Record.find({"user": req.user._id}) as Array<RecordFormat>
+    res.status(200).json(newRecords)
 })
 
 module.exports = {

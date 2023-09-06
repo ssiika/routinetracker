@@ -65,11 +65,32 @@ const updateRecord = async (recordData: {id: string, time: string}, token: strin
     return response;
 }
 
+const deleteRecords = async (recordData: {id: String}, token: string) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    const response = await axios.delete(API_URL + recordData.id, config)
+        .catch(function (error) {
+            if (error.response.data) {
+                throw new Error(error.response.data.message);
+            }
+            })
+            
+    if (response && response.data) {
+        return response.data
+    }
+        
+
+    return response;
+}
 
 const recordService = {
     createRecord,
     getRecords,
-    updateRecord
+    updateRecord,
+    deleteRecords
 }
 
 export default recordService

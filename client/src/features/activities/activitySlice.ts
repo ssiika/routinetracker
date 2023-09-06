@@ -57,6 +57,21 @@ async (activityData, thunkAPI) => {
     }
 })
 
+export const deleteActivity = createAsyncThunk<Activity, {id: string}, { state: RootState }>('activity/delete',
+async (activityData, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token
+        return await activityService.deleteActivity(activityData, token);
+    } catch (error) {
+        let message = 'unknown error message'
+        if (error instanceof Error) {
+                message = error.message || 
+                error.toString();
+                return thunkAPI.rejectWithValue(message)
+        }
+    }
+})
+
 export const createTimeslot = createAsyncThunk
 <Activity, {id: string, day: string, startTime: string, endTime: string}, { state: RootState }>
 ('activity/createTimeslot',
@@ -140,6 +155,20 @@ export const activitySlice = createSlice({
                 activity);
             })
             .addCase(updateActivity.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload as string;
+            })
+            .addCase(deleteActivity.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteActivity.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.message = '';
+                state.userActivityList = state.userActivityList.filter((activity) => activity._id !== action.payload._id)
+            })
+            .addCase(deleteActivity.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload as string;

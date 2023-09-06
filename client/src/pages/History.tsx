@@ -9,7 +9,6 @@ import type { RootState } from '../app/store';
 import Spinner from '../components/Spinner';
 import Graph from '../components/Graph';
 import { Record, Activity, GroupedData } from '../types';
-import { create } from 'domain';
 
 function History() {
 

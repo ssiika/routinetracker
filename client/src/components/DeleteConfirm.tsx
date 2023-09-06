@@ -1,7 +1,11 @@
 import React from 'react'
 import { Activity } from '../types'
+import { useAppDispatch } from '../app/hooks';
+import { deleteActivity } from '../features/activities/activitySlice';
+import { deleteRecords } from '../features/records/recordSlice';
 
 function DeleteConfirm({activity, resetDeletePending}: {activity: Activity, resetDeletePending: Function}) {
+    const dispatch = useAppDispatch();
     
     const onEnter = (e: HTMLButtonElement) => {
         e.classList.add('deleteHover')
@@ -11,8 +15,11 @@ function DeleteConfirm({activity, resetDeletePending}: {activity: Activity, rese
         e.classList.remove('deleteHover')
     } 
 
-    const handleDelete = (id: string) => {
-
+    const handleDelete = async (id: string) => {
+        await dispatch(deleteActivity({id}))
+        await dispatch(deleteRecords({id}))
+        resetDeletePending()
+        return
     }
 
     return (

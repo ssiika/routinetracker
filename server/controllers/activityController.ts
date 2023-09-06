@@ -61,7 +61,7 @@ const updateActivity = asyncHandler(async (req: RequestWUser, res: Response) => 
 
 
 const deleteActivity = asyncHandler(async (req: RequestWUser, res: Response) => {
-    const deletedResponse = await Activity.deleteOne({"_id": req.params.id, "user": req.user._id})
+    const deletedResponse = await Activity.findOneAndDelete({"_id": req.params.id, "user": req.user._id})
 
     res.status(200).json(deletedResponse)
 })

@@ -56,6 +56,22 @@ async (recordData, thunkAPI) => {
     }
 })
 
+export const deleteRecords = createAsyncThunk<Record[], {id: string}, { state: RootState }>('record/delete',
+// Used for deleting all records of an activity when removing an activity
+async (recordData, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token
+        return await recordService.deleteRecords(recordData, token);
+    } catch (error) {
+        let message = 'unknown error message'
+        if (error instanceof Error) {
+                message = error.message || 
+                error.toString();
+                return thunkAPI.rejectWithValue(message)
+        }
+    }
+})
+
 export const recordSlice = createSlice({
     name: 'record', 
     initialState, 
@@ -104,6 +120,20 @@ export const recordSlice = createSlice({
                 record);
             })
             .addCase(updateRecord.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload as string;
+            })
+            .addCase(deleteRecords.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteRecords.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.message = '';
+                state.userRecordList = action.payload;
+            })
+            .addCase(deleteRecords.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload as string;

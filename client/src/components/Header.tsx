@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaSignOutAlt, FaUser, FaCog } from 'react-icons/fa';
+import { FaSignOutAlt, FaUser } from 'react-icons/fa';
 import {Link, useNavigate} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../app/store.js'

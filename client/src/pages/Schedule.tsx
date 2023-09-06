@@ -4,7 +4,6 @@ import TimeslotForm from '../components/TimeslotForm'
 import ScheduleOverlay from '../components/ScheduleOverlay'
 import {useSelector} from 'react-redux';
 import type { RootState } from '../app/store';
-import ActivityForm from '../components/ActivityForm';
 
 function Schedule() {
   const {userActivityList} = useSelector((state: RootState) => state.activities);

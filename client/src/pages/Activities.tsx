@@ -39,7 +39,7 @@ function Activities() {
           <div className="activityList">
           {userActivityList.map((activity) => {
             return (
-              <ActivityBox activity={activity} />
+              <ActivityBox key={activity._id} activity={activity} />
             )
           })}
           </div>
