@@ -72,7 +72,7 @@ function ActivityForm() {
                 <div className="errorbox">
                     {message}
                 </div>
-                <button type="submit" className="btn">Add</button>
+                <button type="submit" className="submitBtn">Add</button>
         </form>
     </div>
   )

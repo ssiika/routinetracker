@@ -27,7 +27,7 @@ function DeleteConfirm({activity, resetDeletePending}: {activity: Activity, rese
             <div className="deleteBox">
                 <div className="deleteText">
                     Are you sure you want to delete {activity.name}? 
-                    All of your data for this activity will be lost
+                    All of your data for this activity will be lost.
                 </div>
                 <button 
                     className="activityDelete" 

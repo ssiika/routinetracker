@@ -205,7 +205,7 @@ function TimeslotForm() {
                 <div className="errorbox">
                     {clientMessage}
                 </div>
-                <button type="submit" className="btn">Add</button>
+                <button type="submit" className="submitBtn">Add</button>
         </form>
     </section>
   )
