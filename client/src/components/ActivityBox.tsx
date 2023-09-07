@@ -56,8 +56,14 @@ function ActivityBox({activity}: {activity: Activity}) {
     ]
 
     return (
-        <div className="colorSettingsBox" key={activity._id}>
-            <div className="colorSettingsName">
+        <div 
+            className="activityPageBox" 
+            key={activity._id}
+            style={{border: `2px solid rgb(${activity.color}, 0.4)`, 
+                    boxShadow: `2px 2px rgb(${activity.color}, 0.2)`
+                  }}
+        >
+            <div className="activityPageName">
                 {activity.name}
             </div>
             <div className="colorBox" style={{backgroundColor: `rgb(${activity.color})`}} onClick={dropdownToggle}>

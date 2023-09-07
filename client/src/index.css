@@ -327,6 +327,32 @@ h1 {
   gap: 20px;
   justify-items: center;
 }
+
+.activityList {
+  display: grid;
+  gap: 10px;
+}
+
+.activityPageBox {
+  border: 2px solid lightgray;
+  border-radius: 2px;
+  display: grid;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 300px;
+  gap: 5px;
+  grid-template-columns: 180px auto auto;
+}
+
+.activityPageBox .colorBox {
+  margin-left: auto;
+}
+
+.activityPageBox > .activityDelete {
+  width: 60px;
+  justify-self: end;
+}
+
 .calendarBox {
   width: 200px;
   height: 150px;
@@ -433,7 +459,7 @@ h1 {
   position: relative;
   height: 20px;
   width: 20px;
-  border: 1px solid black;
+  border: 1px solid rgb(172, 172, 172);
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -445,7 +471,7 @@ h1 {
   gap: 1px;
   padding: 2px;
   box-sizing: border-box;
-  border: 2px solid black;
+  border: 2px solid rgb(109, 109, 109);
   border-radius: 2px;
   box-shadow: 3px 3px lightgray;
   background-color: white;
