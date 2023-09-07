@@ -14,6 +14,16 @@ function Sidebar() {
     <div className='sidebar'>
         <li>
             <Link 
+                to='/guide' 
+                className='sidebarLink'
+                onMouseEnter={(e) => onEnter(e.target as HTMLLIElement)}
+                onMouseLeave={(e) => onLeave(e.target as HTMLLIElement)}
+            >
+                Guide
+            </Link>
+        </li>
+        <li>
+            <Link 
                 to='/schedule'
                 className='sidebarLink'
                 onMouseEnter={(e) => onEnter(e.target as HTMLLIElement)}
@@ -51,17 +61,7 @@ function Sidebar() {
             >
                 Activities
             </Link>
-        </li>
-        <li>
-            <Link 
-                to='/guide' 
-                className='sidebarLink'
-                onMouseEnter={(e) => onEnter(e.target as HTMLLIElement)}
-                onMouseLeave={(e) => onLeave(e.target as HTMLLIElement)}
-            >
-                Guide
-            </Link>
-        </li>
+        </li>   
     </div>
   )
 }

@@ -6,7 +6,9 @@ import { useAppDispatch } from '../app/hooks';
 
 function ActivityForm() {
   const dispatch = useAppDispatch();
-  const {message} = useSelector((state: RootState) => state.activities);
+  const {message, isError} = useSelector((state: RootState) => state.activities);
+
+  const [clientMessage, setClientMessage] = useState('')
 
   const colorList = [
     // red
@@ -41,24 +43,35 @@ function ActivityForm() {
     const target = e.target as typeof e.target & {
       name: { value: string },
     }
+
+    if (!target.name.value) {
+      setClientMessage('Please provide an activity name')
+      return;
+    }
+
     const bodyData = {
       name: target.name.value,
       start: new Date().toLocaleDateString(),
       color: formColor
     }
 
+    setClientMessage('')
     await dispatch(createActivity(bodyData));
+
+    if (isError) {
+      setClientMessage(message)
+    }
 }
 
   return (
     <div className='formBox'>
-      <label htmlFor="activityForm">Add an Activity</label>
-      <form onSubmit={onSubmit} name="activityForm">
-                <label htmlFor="name">Name:</label>
+      <div className='activityFormHeader'>Add an Activity</div>
+      <form onSubmit={onSubmit} name="activityForm" className='activityForm'>
                 <input 
                   type="text"
                   name="name"
                   id="name"
+                  placeholder="Name "
                 />
                 <div className="colorBox" style={{backgroundColor: `rgb(${formColor})`}} onClick={() => setIsVisible(!isVisible)}>
                   <div className={isVisible ? "colorDropdown visible" : "colorDropdown"}>{colorList.map((color, index) => {
@@ -67,13 +80,12 @@ function ActivityForm() {
                     )
                     })}
                   </div>
-                </div>
-
-                <div className="errorbox">
-                    {message}
-                </div>
+                </div>              
                 <button type="submit" className="submitBtn">Add</button>
         </form>
+        <div className="errorbox">
+          {clientMessage}
+        </div>
     </div>
   )
 }

@@ -36,15 +36,15 @@ function Header() {
                         {user.username}
                     </li>
                     <li>
-                        <div className="userIcon" onClick={menuToggle}>
-                            
-                                <ul className={dropdownActive ? "dropdown visible" : "dropdown"}>
-                                        <li>
-                                            <button className='logout' onClick={onLogout}>
-                                                <FaSignOutAlt /> Logout
-                                            </button>
-                                        </li>                                 
-                                </ul> 
+                        <div className="userIcon">
+                            <div className="userIconSymbol" onClick={menuToggle}>S</div>
+                            <ul className={dropdownActive ? "dropdown visible" : "dropdown"}>
+                                    <li>
+                                        <button className='logout' onClick={onLogout}>
+                                            <FaSignOutAlt /> Logout
+                                        </button>
+                                    </li>                                 
+                            </ul> 
                         </div>
                     </li>
                 </>

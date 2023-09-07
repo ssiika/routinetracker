@@ -14,7 +14,7 @@ function Schedule() {
   return (
     <>
         <Sidebar />
-        <div className='content'>
+        <div className='content scheduleContent'>
           <div className="schedule">
             <div className="timeLegend">
               {times.map((time, index) => {

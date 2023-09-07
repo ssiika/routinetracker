@@ -108,10 +108,11 @@ function TimeslotForm() {
     }
     return (
     <section className="formBox">
-        <label htmlFor="timeslotForm">Add a Timeslot</label>
+        <div className="timeslotFormHeader">Add a Timeslot</div>
         <form onSubmit={onSubmit} name="timeslotForm">
                 <label htmlFor="startHours">Start:</label>
                 <select 
+                    className='formSelect'
                     name="startHours" 
                     id="startHours" 
                     onChange={(e) => {onSelectChange(e, setStartHours); onSelectChange(e, setEndHours);}} 
@@ -130,6 +131,7 @@ function TimeslotForm() {
                     }
                 </select>
                 <select 
+                    className='formSelect'
                     name="startMinutes"
                     id="startMinutes"
                     onChange={(e) => onSelectChange(e, setStartMinutes)} 
@@ -140,6 +142,7 @@ function TimeslotForm() {
                 </select>
                 <label htmlFor="endHours">End:</label>
                 <select 
+                    className='formSelect'
                     name="endHours" 
                     id="endHours" 
                     onChange={(e) => onSelectChange(e, setEndHours)} 
@@ -161,6 +164,7 @@ function TimeslotForm() {
                     }
                 </select>
                 <select 
+                    className='formSelect'
                     name="endMinutes" 
                     id="endMinutes" 
                     onChange={(e) => onSelectChange(e, setEndMinutes)} 
@@ -188,14 +192,14 @@ function TimeslotForm() {
                     }   
                 </select>
                 <label htmlFor="daySelect">Day:</label>
-                <select name="daySelect" id="daySelect">
+                <select name="daySelect" id="daySelect" className='formSelect'>
                     {days.map((day, index) => {
                         return (
                             <option value={index} key={`dayOption-${index}`}>{day}</option>
                         )
                     })}
                 </select>
-                <select name="activitySelect" id="activitySelect">
+                <select name="activitySelect" id="activitySelect" className='formSelect'>
                     {userActivityList.map((activity, index) => {
                         return (
                             <option value={activity._id} key={`activityOption-${index}`}>{activity.name}</option>
