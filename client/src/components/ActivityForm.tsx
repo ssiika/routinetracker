@@ -4,7 +4,7 @@ import type { RootState } from '../app/store';
 import { createActivity } from '../features/activities/activitySlice';
 import { useAppDispatch } from '../app/hooks';
 
-function ActivityForm() {
+function ActivityForm({resetPopupOpen}: {resetPopupOpen: Function}) {
   const dispatch = useAppDispatch();
   const {message, isError} = useSelector((state: RootState) => state.activities);
 
@@ -60,13 +60,17 @@ function ActivityForm() {
 
     if (isError) {
       setClientMessage(message)
+      return
     }
+
+    resetPopupOpen()
 }
 
   return (
-    <div className='formBox'>
-      <div className='activityFormHeader'>Add an Activity</div>
-      <form onSubmit={onSubmit} name="activityForm" className='activityForm'>
+    <div className="popupContainer">
+      <div className='activityFormBox'>
+        <div className='activityFormHeader'>Add an Activity</div>
+        <form onSubmit={onSubmit} name="activityForm" className='activityForm'>
                 <input 
                   type="text"
                   name="name"
@@ -86,7 +90,10 @@ function ActivityForm() {
         <div className="errorbox">
           {clientMessage}
         </div>
+        <button className="popupCancel" onClick={() => resetPopupOpen()}>Cancel</button>
+      </div>
     </div>
+    
   )
 }
 

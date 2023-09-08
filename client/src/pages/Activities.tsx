@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux';
 import type { RootState } from '../app/store';
 import { useNavigate } from "react-router-dom";
@@ -15,6 +15,12 @@ function Activities() {
 
   const {userActivityList, isLoading: activityLoading} = useSelector((state: RootState) => state.activities);
   const {user, isLoading: userLoading} = useSelector((state: RootState) => state.auth);
+
+  const [popupOpen, setPopupOpen] = useState(false)
+
+  const resetPopupOpen = () => {
+    setPopupOpen(false)
+  }
 
   useEffect(() => {
     if (!user) {
@@ -43,7 +49,15 @@ function Activities() {
             )
           })}
           </div>
-          <ActivityForm />
+          <button 
+                className="addBtn" 
+                onClick={() => setPopupOpen(true)}
+          >Add an Activity</button>
+          {popupOpen && 
+          <ActivityForm 
+            resetPopupOpen={resetPopupOpen}
+          />}
+          
         </div>
     </>   
   )

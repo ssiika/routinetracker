@@ -23,7 +23,7 @@ function DeleteConfirm({activity, resetDeletePending}: {activity: Activity, rese
     }
 
     return (
-        <div className="deleteBoxContainer">
+        <div className="popupContainer">
             <div className="deleteBox">
                 <div className="deleteText">
                     Are you sure you want to delete {activity.name}? 
@@ -35,7 +35,7 @@ function DeleteConfirm({activity, resetDeletePending}: {activity: Activity, rese
                     onMouseLeave={(e) => onLeave(e.target as HTMLButtonElement)}
                     onClick={() => handleDelete(activity._id)}
                 >Delete</button>
-                <button className="deleteCancel" onClick={() => resetDeletePending()}>Cancel</button>
+                <button className="popupCancel" onClick={() => resetDeletePending()}>Cancel</button>
             </div>
         </div>  
     )
