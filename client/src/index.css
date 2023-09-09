@@ -302,7 +302,7 @@ h1 {
 }
 
 .scheduleContent {
-  gap: 20px;
+  gap: 30px;
 }
 
 .log-activities {
@@ -353,6 +353,54 @@ h1 {
   justify-self: end;
 }
 
+.timeslotFormBox {
+  display: grid;
+  justify-items: center;
+  justify-self: center;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 4px 4px lightgray;
+  box-sizing: border-box;
+  height: 350px;
+  width: 400px;
+  padding: 25px;
+}
+
+.timeslotFormBox > .errorbox {
+  height: 30px;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.timeslotForm {
+  display: grid;
+  justify-content: center;
+  width: 100%;
+  row-gap: 10px;
+  grid-template-rows: repeat(5, auto);
+  grid-template-columns: repeat(3, 75px);
+}
+
+.timeslotForm > .submitBtn {
+  grid-area: 5 / 1 / 6 / 4;
+  width: 60px;
+  justify-self: center;
+  font-size: 15px;
+}
+
+.timeslotForm > #daySelect {
+  grid-area: 3 / 2 / 4 / 4;
+}
+
+.timeslotForm > #activitySelect {
+  grid-area: 4 / 1 / 5 / 4;
+}
+
+
+.timeslotForm > select {
+  padding: 3px;
+}
+
+
 .activityFormBox {
   display: grid;
   justify-items: center;
@@ -364,7 +412,7 @@ h1 {
   padding: 20px;
 }
 
-.activityFormHeader {
+.activityFormHeader, .timeslotFormHeader {
   font-weight: 500;
   margin-top: 20px;
 }
@@ -580,12 +628,6 @@ h1 {
   height: 30px;
 }
 
-.formBox {
-  display: grid;
-  justify-items: center;
-  justify-self: center;
-  background-color: white;
-}
 
 .deleteText {
   grid-area: 1 / 1 / 2 / 3;

@@ -1,16 +1,46 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 import TimeslotForm from '../components/TimeslotForm'
 import ScheduleOverlay from '../components/ScheduleOverlay'
 import {useSelector} from 'react-redux';
+import { useAppDispatch } from '../app/hooks';
+import { useNavigate } from "react-router-dom";
+import { getActivities, activityReset } from '../features/activities/activitySlice';
 import type { RootState } from '../app/store';
+import Spinner from '../components/Spinner';
 
 function Schedule() {
-  const {userActivityList} = useSelector((state: RootState) => state.activities);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const {user, isLoading: userLoading} = useSelector((state: RootState) => state.auth);
+  const {userActivityList, message, isLoading: activityLoading, isError} = useSelector((state: RootState) => state.activities);
+
+  const [popupOpen, setPopupOpen] = useState(false)
+
+  const resetPopupOpen = () => {
+    setPopupOpen(false)
+  }
 
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
   const times = ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm', '12am']
   
+  useEffect(() => {
+    if (!user) {
+      navigate('/login')
+    }
+
+    dispatch(getActivities())
+
+    return () => {
+      dispatch(activityReset())
+    }
+  }, [user, dispatch, navigate])
+
+  if (userLoading || activityLoading) {
+    return <Spinner />
+  }
+
   return (
     <>
         <Sidebar />
@@ -63,7 +93,14 @@ function Schedule() {
               )
             })}
           </div>
-          <TimeslotForm />
+          <button 
+                className="addBtn" 
+                onClick={() => setPopupOpen(true)}
+          >Add a Timeslot</button>
+          {popupOpen && 
+          <TimeslotForm 
+            resetPopupOpen={resetPopupOpen}
+          />}
         </div>
     </>
   )

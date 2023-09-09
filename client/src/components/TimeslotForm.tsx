@@ -1,15 +1,11 @@
-import React, { SyntheticEvent, useEffect, useState } from 'react'
+import React, { SyntheticEvent, useState } from 'react'
 import { createTimeslot } from '../features/activities/activitySlice';
 import { useAppDispatch } from '../app/hooks';
 import type { RootState } from '../app/store';
 import {useSelector} from 'react-redux';
-import { useNavigate } from "react-router-dom";
-import { getActivities, activityReset } from '../features/activities/activitySlice'
-import Spinner from './Spinner';
 
-function TimeslotForm() {
+function TimeslotForm({resetPopupOpen}: {resetPopupOpen: Function}) {
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
 
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
@@ -21,8 +17,7 @@ function TimeslotForm() {
 
     const [clientMessage, setClientMessage] = useState('')
 
-    const {user} = useSelector((state: RootState) => state.auth);
-    const {userActivityList, message, isLoading, isError} = useSelector((state: RootState) => state.activities);
+    const {userActivityList, message, isError} = useSelector((state: RootState) => state.activities);
     
     const onSelectChange = (e: SyntheticEvent, fn: Function) => {
         e.preventDefault();
@@ -86,133 +81,125 @@ function TimeslotForm() {
 
         if (isError) {
             setClientMessage(message)
+            return
         }
         
+        resetPopupOpen()
     }
 
-    useEffect(() => {
-        if (!user) {
-          navigate('/login')
-        }
-
-        dispatch(getActivities())
     
-        return () => {
-          dispatch(activityReset())
-        }
-      }, [user, dispatch, navigate])
 
 
-    if (isLoading) {
-        return <Spinner />
-    }
+    
     return (
-    <section className="formBox">
-        <div className="timeslotFormHeader">Add a Timeslot</div>
-        <form onSubmit={onSubmit} name="timeslotForm">
-                <label htmlFor="startHours">Start:</label>
-                <select 
-                    className='formSelect'
-                    name="startHours" 
-                    id="startHours" 
-                    onChange={(e) => {onSelectChange(e, setStartHours); onSelectChange(e, setEndHours);}} 
-                    value={startHours}
-                >
-                    {(function () {
-                        let hoursArray = [];
-                        for (let i = 0; i < 24; i++) {
-                            let hour = `${Math.floor(i / 10)}${i % 10}`
-                             hoursArray.push(
-                                <option value={hour} key={`sHOpt-${i}`}>{hour}</option>
-                            )
-                        }
-                        return hoursArray
-                    })()
-                    }
-                </select>
-                <select 
-                    className='formSelect'
-                    name="startMinutes"
-                    id="startMinutes"
-                    onChange={(e) => onSelectChange(e, setStartMinutes)} 
-                    value={startMinutes}
-                >
-                    <option value="00">00</option>
-                    <option value="30">30</option>
-                </select>
-                <label htmlFor="endHours">End:</label>
-                <select 
-                    className='formSelect'
-                    name="endHours" 
-                    id="endHours" 
-                    onChange={(e) => onSelectChange(e, setEndHours)} 
-                    value={endHours}
-                >
-                    {(function () {
-                        let hoursArray = [];
-                        for (let i = 0; i < 25; i++) {
-                            let hour = `${Math.floor(i / 10)}${i % 10}`
-                            if (hour >= startHours) {
+        <div className="popupContainer">
+            <section className="timeslotFormBox">
+                <div className="timeslotFormHeader">Add a Timeslot</div>
+                <form onSubmit={onSubmit} name="timeslotForm" className='timeslotForm'>
+                    <label htmlFor="startHours">Start:</label>
+                    <select 
+                        className='formSelect'
+                        name="startHours" 
+                        id="startHours" 
+                        onChange={(e) => {onSelectChange(e, setStartHours); onSelectChange(e, setEndHours);}} 
+                        value={startHours}
+                    >
+                        {(function () {
+                            let hoursArray = [];
+                            for (let i = 0; i < 24; i++) {
+                                let hour = `${Math.floor(i / 10)}${i % 10}`
                                 hoursArray.push(
-                                    <option value={hour} key={`eHOpt-${i}`}>{hour}</option>
+                                    <option value={hour} key={`sHOpt-${i}`}>{hour}</option>
                                 )
-                            }     
+                            }
+                            return hoursArray
+                        })()
                         }
-
-                        return hoursArray
-                    })()
-                    }
-                </select>
-                <select 
-                    className='formSelect'
-                    name="endMinutes" 
-                    id="endMinutes" 
-                    onChange={(e) => onSelectChange(e, setEndMinutes)} 
-                    value={endMinutes}
-                >
-                    {(function () {
-                        if (endHours === '24') {
-                            return (
-                                <option value="00">00</option>
-                            )
+                    </select>
+                    <select 
+                        className='formSelect'
+                        name="startMinutes"
+                        id="startMinutes"
+                        onChange={(e) => onSelectChange(e, setStartMinutes)} 
+                        value={startMinutes}
+                    >
+                        <option value="00">00</option>
+                        <option value="30">30</option>
+                    </select>
+                    <label htmlFor="endHours">End:</label>
+                    <select 
+                        className='formSelect'
+                        name="endHours" 
+                        id="endHours" 
+                        onChange={(e) => onSelectChange(e, setEndHours)} 
+                        value={endHours}
+                    >
+                        {(function () {
+                            let hoursArray = [];
+                            for (let i = 0; i < 25; i++) {
+                                let hour = `${Math.floor(i / 10)}${i % 10}`
+                                if (hour >= startHours) {
+                                    hoursArray.push(
+                                        <option value={hour} key={`eHOpt-${i}`}>{hour}</option>
+                                    )
+                                }     
+                            }
+                            return hoursArray
+                        })()
                         }
-                        if (startHours === endHours && startMinutes === '30') {
-                            return (
-                                <option value="30">30</option>
-                            )
-                        } else {
-                            return (
-                                <>
+                    </select>
+                    <select 
+                        className='formSelect'
+                        name="endMinutes" 
+                        id="endMinutes" 
+                        onChange={(e) => onSelectChange(e, setEndMinutes)} 
+                        value={endMinutes}
+                    >
+                        {(function () {
+                            if (endHours === '24') {
+                                return (
                                     <option value="00">00</option>
+                                )
+                            }
+                            if (startHours === endHours && startMinutes === '30') {
+                                return (
                                     <option value="30">30</option>
-                                </>
+                                )
+                            } else {
+                                return (
+                                    <>
+                                        <option value="00">00</option>
+                                        <option value="30">30</option>
+                                    </>
+                                )
+                            }
+                        })()
+                        }   
+                    </select>
+                    <label htmlFor="daySelect">Day:</label>
+                    <select name="daySelect" id="daySelect" className='formSelect'>
+                        {days.map((day, index) => {
+                            return (
+                                <option value={index} key={`dayOption-${index}`}>{day}</option>
                             )
-                        }
-                    })()
-                    }   
-                </select>
-                <label htmlFor="daySelect">Day:</label>
-                <select name="daySelect" id="daySelect" className='formSelect'>
-                    {days.map((day, index) => {
-                        return (
-                            <option value={index} key={`dayOption-${index}`}>{day}</option>
-                        )
-                    })}
-                </select>
-                <select name="activitySelect" id="activitySelect" className='formSelect'>
-                    {userActivityList.map((activity, index) => {
-                        return (
-                            <option value={activity._id} key={`activityOption-${index}`}>{activity.name}</option>
-                        )
-                    })}
-                </select>
+                        })}
+                    </select>
+                    <select name="activitySelect" id="activitySelect" className='formSelect'>
+                        {userActivityList.map((activity, index) => {
+                            return (
+                                <option value={activity._id} key={`activityOption-${index}`}>{activity.name}</option>
+                            )
+                        })}
+                    </select>
+                    <button type="submit" className="submitBtn">Add</button>                                   
+                </form>
                 <div className="errorbox">
-                    {clientMessage}
-                </div>
-                <button type="submit" className="submitBtn">Add</button>
-        </form>
-    </section>
-  )
+                        {clientMessage}
+                </div> 
+                <button className="popupCancel" onClick={() => resetPopupOpen()}>Cancel</button>
+            </section>
+        </div>
+    )
 }
 
 export default TimeslotForm
