@@ -331,6 +331,8 @@ h1 {
   display: grid;
   gap: 10px;
   justify-content: center;
+  grid-template-rows: repeat(5, auto);
+  grid-auto-flow: column;
 }
 
 .activityPageBox {
@@ -566,8 +568,8 @@ h1 {
 
 .colorDropdown {
   display: none;
-  grid-template-columns: repeat(5, 20px);
-  grid-template-rows: repeat(2, 20px);
+  grid-template-columns: repeat(7, 20px);
+  grid-template-rows: repeat(3, 20px);
   gap: 1px;
   padding: 2px;
   box-sizing: border-box;

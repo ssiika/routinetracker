@@ -29,30 +29,52 @@ function ActivityBox({activity}: {activity: Activity}) {
         if (e.target === e.currentTarget) {
           const dropdown = e.currentTarget.firstChild as HTMLElement
           dropdown.classList.toggle('visible')
-        }  
+        } 
     }
-
+        
     const colorList = [
-        // red
-        '255, 51, 51',
+        // dark brown 
+        '92, 64, 51',
+        // maroon
+        '128, 0, 0',
+        // brown
+        '170, 110, 40',
+        // olive
+        '128, 128, 0',
         // green
-        '51, 153, 51',
-        // blue
-        '51, 51, 255',
-        // yellow
-        '255, 255, 51',
-        // orange
-        '255, 153, 51',
-        // light blue
-        '51, 255, 255',
-        // light green 
-        '153, 255, 51',
+        '60, 180, 75',
+        // navy
+        '0, 0, 128',
+        // purple
+        '145, 30, 180',
         // black
         '0, 0, 0',
-        // purple
-        '128, 51, 128', 
-        // pink
-        '255, 51, 255', 
+        // red
+        '230, 25, 75',
+        // orange
+        '245, 130, 48',
+        // yellow
+        '255, 225, 25',
+        // teal
+        '0, 128, 128',
+        // blue
+        '0, 130, 200',
+        // magenta
+        '240, 50, 230',
+        // grey
+        '128, 128, 128',        
+        // pink 
+        '250, 190, 212',
+        // apricot
+        '255, 215, 180',
+        // lime
+        '210, 245, 60',
+        // mint
+        '170, 255, 195',
+        // cyan 
+        '70, 240, 240',
+        // lavender
+        '220, 190, 255'   
     ]
 
     return (

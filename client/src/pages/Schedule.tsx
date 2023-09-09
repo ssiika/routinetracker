@@ -86,7 +86,7 @@ function Schedule() {
             {userActivityList.map((activity, index) => {
               return (
                 <div className="legendBox" key={`activityLegend-${index}`}>
-                  <div className="colorBox" style={{backgroundColor: `rgb(${activity.color})`}}></div>
+                  <div className="colorBox" style={{backgroundColor: `rgb(${activity.color})`, cursor: 'auto'}}></div>
                   <div className="legendName">{activity.name}</div>
                 </div>
                 
