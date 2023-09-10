@@ -14,7 +14,7 @@ function Schedule() {
   const navigate = useNavigate();
 
   const {user, isLoading: userLoading} = useSelector((state: RootState) => state.auth);
-  const {userActivityList, message, isLoading: activityLoading, isError} = useSelector((state: RootState) => state.activities);
+  const {userActivityList, isLoading: activityLoading} = useSelector((state: RootState) => state.activities);
 
   const [popupOpen, setPopupOpen] = useState(false)
 

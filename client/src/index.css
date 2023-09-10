@@ -94,10 +94,6 @@ button {
   transition-timing-function: ease-out;
 }
 
-.disabled {
-  background-color: #828282;
-}
-
 .btn svg {
   margin-right: 8px;
 }
@@ -305,10 +301,19 @@ h1 {
   gap: 30px;
 }
 
+.logDesc {
+  justify-self: center;
+  font-size: 18px;
+  padding-top: 15px;
+}
+
 .log-activities {
   display: grid;
-  grid-template-columns: repeat(4, 350px);
+  grid-template-columns: repeat(4, 300px);
+  row-gap: 20px;
+  grid-auto-flow: row;
   padding: 10px;
+  justify-items: center;
 }
 
 .activityHeader {
@@ -405,6 +410,7 @@ h1 {
 
 .activityFormBox {
   display: grid;
+  grid-template-rows: auto auto 30px auto;
   justify-items: center;
   justify-self: center;
   background-color: rgb(255, 255, 255);
@@ -442,6 +448,39 @@ h1 {
 
 .activityForm > input:focus {
   outline: none;
+}
+
+.recordFormBox {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 4px 4px lightgray;
+  height: 180px;
+  width: 350px;
+  padding: 20px;
+  grid-template-rows: auto auto 35px auto;
+}
+
+.recordForm {
+  border: 2px solid lightgray;
+  height: 45px;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+.recordForm > input {
+  border: none;
+}
+
+.recordForm > input:focus {
+  outline: none;
+}
+
+.recordDesc {
+  width: 275px;
+  text-align: center;
+  font-weight: 500;
 }
 
 .calendarBox {
@@ -609,6 +648,13 @@ h1 {
   width: 150px;
   font-size: 15px;
   justify-self: center;
+}
+
+.addBtn:disabled, 
+.addBtn[disabled] {
+  background-color: lightgray;
+  border: 2px solid #828282;
+  cursor: auto;
 }
 
 .deleteBox {

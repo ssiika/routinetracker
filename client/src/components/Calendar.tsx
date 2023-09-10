@@ -16,16 +16,25 @@ function Calendar({records, calendarClick, activityData}: {records: Record[], ca
 
     
     // calendarStart returns either a date 30 days ago, or if the activity was created within 30 days the date of creation
-    var calendarStart: Date = new Date(today - Math.min((today - formattedStart), (24*60*60*1000) * 30))
+    var calendarStart: Date = new Date(today - Math.min((today - formattedStart), (24*60*60*1000) * 29))
     var recentRecords = records.filter((record) => new Date(record.day).getTime() >= calendarStart.getTime())
     var largestTimeValue = Math.max(...recentRecords.map(x => x.time))
+    
     
     // ISSUE: need to turn record.day into Date not string
   return ( 
         <div className="calendarBox">
             {(function (start: Date, end: Date) {
+
+                /* Tomorrow is used for end date as the while loop checks if the 
+                start and end dates are equal, and the array should include the current date */
+                const tomorrow = addDays(end, 1)
+
                 let calendarArray = []
-                while (start.toLocaleDateString() !== end.toLocaleDateString()) {
+                
+                while (start.toLocaleDateString() !== tomorrow.toLocaleDateString()) {
+
+                    
 
                     // Check if there is a record in recent records matching the relevant date
 

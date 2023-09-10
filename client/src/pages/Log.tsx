@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from '../components/Sidebar';
 import Calendar from '../components/Calendar';
 import RecordForm from '../components/RecordForm';
+import Spinner from '../components/Spinner';
 import {useSelector} from 'react-redux';
 import { useAppDispatch } from '../app/hooks';
 import type { RootState } from '../app/store';
@@ -14,11 +15,17 @@ function Log() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const {user} = useSelector((state: RootState) => state.auth);
+  const {user, isLoading: userLoading} = useSelector((state: RootState) => state.auth);
   const {userRecordList} = useSelector((state: RootState) => state.records)
-  const {userActivityList} = useSelector((state: RootState) => state.activities);
+  const {userActivityList, isLoading: activityLoading} = useSelector((state: RootState) => state.activities);
+  const { isLoading: recordLoading} = useSelector((state: RootState) => state.records);
 
   const [recordData, setRecordData] = useState<RecordUpdateData | null>(null);
+  const [popupOpen, setPopupOpen] = useState(false)
+
+  const resetPopupOpen = () => {
+    setPopupOpen(false)
+  }
 
   const calendarClick = (data: RecordUpdateData) => {
     return setRecordData(data)
@@ -39,12 +46,27 @@ function Log() {
     }
   }, [user, dispatch, navigate])
 
+  if (userLoading || activityLoading || recordLoading) {
+    return <Spinner />
+  }
+
   return (
     <>
         <Sidebar />
         <div className='content'>
-          <div className='log-title'>Log time spent in your activities</div>
-            <RecordForm record={recordData} />
+          <div className='logDesc'>
+            {recordData ? `${recordData.activity_name} on ${recordData.day}` : 'Click on a day to add a record'}
+          </div>
+          <button 
+            className={recordData ? 'addBtn' : 'addBtn disabled'}
+            disabled={!recordData ? true: false}
+            onClick={() => setPopupOpen(true)}
+          >Add a Record</button>
+          {popupOpen && 
+          <RecordForm 
+            record={recordData}
+            resetPopupOpen={resetPopupOpen}
+          />}
             <div className='log-activities'>
               {userActivityList.length > 0 ? (
                 <>
