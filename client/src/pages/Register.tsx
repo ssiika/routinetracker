@@ -52,8 +52,8 @@ function Register() {
       setLocalError('')
       // Register user
       const userData = {
-        username,
-        password,
+        username: username.trim(),
+        password: password.trim(),
       }
 
       dispatch(register(userData));
@@ -65,9 +65,9 @@ function Register() {
   }
 
   return (
-    <div className='content'>
+    <div className='registerContent'>
       <section className="heading">
-        <h1>
+        <h1 className='registerHeader'>
           <FaUser /> Register
         </h1>
       </section>
@@ -79,7 +79,7 @@ function Register() {
             id='username' 
             name='username' 
             value={username} 
-            placeholder='Enter username'
+            placeholder='Username'
             onChange={onChange} />
           </div>
           <div className="form-group">
@@ -88,7 +88,7 @@ function Register() {
             id='password' 
             name='password' 
             value={password} 
-            placeholder='Enter password'
+            placeholder='Password'
             onChange={onChange} />
           </div>
           <div className="form-group">
@@ -102,7 +102,7 @@ function Register() {
           </div>
           <div className="errorbox">{localError ? localError : message}</div>
           <div className="form-group">
-            <button type='submit' className='btn btn-block'>
+            <button type='submit' className='registerBtn'>
               Submit
             </button>
           </div>

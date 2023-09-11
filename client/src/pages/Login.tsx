@@ -45,8 +45,8 @@ function Login() {
     e.preventDefault();
 
     const userData = {
-      username,
-      password,
+      username: username.trim(),
+      password: password.trim(),
     }
 
     dispatch(login(userData));
@@ -57,9 +57,9 @@ function Login() {
   }
 
   return (
-    <div className='content'>
+    <div className='loginContent'>
       <section className="heading">
-        <h1>
+        <h1 className='loginHeader'>
           <FaSignInAlt /> Login
         </h1>
       </section>
@@ -71,7 +71,7 @@ function Login() {
             id='username' 
             name='username' 
             value={username} 
-            placeholder='Enter username'
+            placeholder='Username'
             onChange={onChange} />
           </div>
           <div className="form-group">
@@ -80,12 +80,12 @@ function Login() {
             id='password' 
             name='password' 
             value={password} 
-            placeholder='Enter password'
+            placeholder='Password'
             onChange={onChange} />
           </div>
           <div className="errorbox">{message}</div>
           <div className="form-group">
-            <button type='submit' className='btn btn-block'>
+            <button type='submit' className='loginBtn'>
               Submit
             </button>
           </div>

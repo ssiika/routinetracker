@@ -56,8 +56,8 @@ function Header() {
                             Login
                         </Link>
                     </li>
-                    <li className='registerbox'>
-                        <Link to='/register'>
+                    <li>
+                        <Link to='/register' className='registerbox'>
                             <FaUser /> Register
                         </Link>
                     </li>
