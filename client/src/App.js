@@ -16,7 +16,7 @@ function App() {
         <div className="container">
           <Header />
           <Routes>
-            <Route path='/' element={ <Navigate to="/schedule" /> }/>
+            <Route path='/' element={ <Navigate to="/guide" /> }/>
             <Route path='/activities' element={<Activities />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />

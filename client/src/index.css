@@ -301,6 +301,18 @@ h1 {
   gap: 30px;
 }
 
+.guideContent {
+  gap: 20px;
+  padding-bottom: 100px;
+}
+
+
+h2, h3 {
+  border-bottom: 1px solid darkgray;
+  padding-bottom: 10px;
+}
+
+
 .logDesc {
   justify-self: center;
   font-size: 18px;
@@ -499,6 +511,7 @@ h1 {
   height: 25px;
   border: 1px solid rgb(105, 105, 105);
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .calendarHover {
