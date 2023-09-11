@@ -1,6 +1,7 @@
 import React, { SyntheticEvent, useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import Sidebar from '../components/Sidebar'
+import NoActivities from '../components/NoActivities';
 import {useSelector} from 'react-redux';
 import { useAppDispatch } from '../app/hooks';
 import { getRecords, recordReset } from '../features/records/recordSlice';
@@ -146,6 +147,10 @@ function History() {
 
   if (recordLoading || activityLoading) {
     return <Spinner />
+  }
+
+  if (userActivityList.length === 0) {
+    return <NoActivities />
   }
 
   return (

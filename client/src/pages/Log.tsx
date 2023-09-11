@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar';
 import Calendar from '../components/Calendar';
 import RecordForm from '../components/RecordForm';
 import Spinner from '../components/Spinner';
+import NoActivities from '../components/NoActivities';
 import {useSelector} from 'react-redux';
 import { useAppDispatch } from '../app/hooks';
 import type { RootState } from '../app/store';
@@ -48,6 +49,10 @@ function Log() {
 
   if (userLoading || activityLoading || recordLoading) {
     return <Spinner />
+  }
+
+  if (userActivityList.length === 0) {
+    return <NoActivities />
   }
 
   return (

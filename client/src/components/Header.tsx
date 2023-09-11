@@ -20,6 +20,7 @@ function Header() {
     }
 
     const onLogout = () => {
+        setDropdownActive(!dropdownActive)
         dispatch(logout());
         dispatch(reset());
         navigate('/');

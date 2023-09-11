@@ -57,7 +57,7 @@ function Login() {
   }
 
   return (
-    <div>
+    <div className='content'>
       <section className="heading">
         <h1>
           <FaSignInAlt /> Login

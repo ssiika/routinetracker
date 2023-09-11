@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { getActivities, activityReset } from '../features/activities/activitySlice';
 import type { RootState } from '../app/store';
 import Spinner from '../components/Spinner';
+import NoActivities from '../components/NoActivities';
 
 function Schedule() {
   const dispatch = useAppDispatch();
@@ -39,6 +40,10 @@ function Schedule() {
 
   if (userLoading || activityLoading) {
     return <Spinner />
+  }
+
+  if (userActivityList.length === 0) {
+    return <NoActivities />
   }
 
   return (

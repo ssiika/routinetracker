@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
+import {useSelector} from 'react-redux';
+import type { RootState } from '../app/store';
 import Sidebar from '../components/Sidebar'
 
 function Guide() {
+  const navigate = useNavigate();
+
+  const {user} = useSelector((state: RootState) => state.auth);
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login')
+    }
+  })
+
   return (
     <>
         <Sidebar />
@@ -12,7 +25,7 @@ function Guide() {
              or any other thing that you do on a regular basis and want to monitor. 
             The app is flexible, and you can pick and choose which features are applicable to your needs.
             For example, you may opt to use the log feature and avoid using the schedule feature, or vice versa.
-            To start, you can head over to the <a href="/activities">Activities</a> page and create your first activity.
+            To start, you can head over to the <a className="inlineLink" href="/activities">Activities</a> page and create your first activity.
           </p>
           <h3>Activities</h3>
           <p>
