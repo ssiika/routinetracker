@@ -25,7 +25,7 @@ function Login() {
   )
 
   useEffect(() => {
-    if (isSuccess || user) {
+    if (isSuccess || Object.keys(user).length !== 0) {
       navigate('/')
     }
     

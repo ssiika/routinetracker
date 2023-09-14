@@ -10,7 +10,7 @@ function Guide() {
   const {user} = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
-    if (!user) {
+    if (Object.keys(user).length === 0) {
       navigate('/login')
     }
   })

@@ -27,7 +27,7 @@ function Schedule() {
   const times = ['12am', '3am', '6am', '9am', '12pm', '3pm', '6pm', '9pm', '12am']
   
   useEffect(() => {
-    if (!user) {
+    if (Object.keys(user).length === 0) {
       navigate('/login')
     }
 

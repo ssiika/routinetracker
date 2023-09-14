@@ -25,20 +25,21 @@ function Header() {
         dispatch(reset());
         navigate('/');
     }
+
     return (
     <header className='header'>
         <div className="logo">
             <Link to='/'>Routine Tracker</Link>
         </div>
         <ul className='userInfo'>
-            {user ? (
+            {(user && Object.keys(user).length !== 0)  ? (
                 <>
                     <li>
                         {user.username}
                     </li>
                     <li>
                         <div className="userIcon">
-                            <div className="userIconSymbol" onClick={menuToggle}>S</div>
+                            <div className="userIconSymbol" onClick={menuToggle}>{ user.username ? user.username[0] : ''}</div>
                             <ul className={dropdownActive ? "dropdown visible" : "dropdown"}>
                                     <li>
                                         <button className='logout' onClick={onLogout}>
