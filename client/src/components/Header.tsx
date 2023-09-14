@@ -39,7 +39,9 @@ function Header() {
                     </li>
                     <li>
                         <div className="userIcon">
-                            <div className="userIconSymbol" onClick={menuToggle}>{ user.username ? user.username[0] : ''}</div>
+                            <div className="userIconSymbol" onClick={menuToggle}>
+                               { user.username ? user.username[0] : ''}
+                            </div>
                             <ul className={dropdownActive ? "dropdown visible" : "dropdown"}>
                                     <li>
                                         <button className='logout' onClick={onLogout}>
