@@ -19,9 +19,9 @@ function Header() {
         }  
     }
 
-    const onLogout = () => {
+    const onLogout = async () => {
         setDropdownActive(!dropdownActive)
-        dispatch(logout());
+        await dispatch(logout());
         dispatch(reset());
         navigate('/');
     }

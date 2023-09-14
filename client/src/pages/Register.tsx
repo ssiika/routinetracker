@@ -28,7 +28,7 @@ function Register() {
   
   useEffect(() => {
 
-    if (isSuccess || Object.keys(user).length !== 0) {
+    if (isSuccess || (user && Object.keys(user).length !== 0)) {
       navigate('/')
     }
 
