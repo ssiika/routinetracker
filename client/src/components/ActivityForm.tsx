@@ -82,6 +82,7 @@ function ActivityForm({resetPopupOpen}: {resetPopupOpen: Function}) {
 
     if (isError) {
       setClientMessage(message)
+      console.log(message)
       return
     }
 
