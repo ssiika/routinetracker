@@ -7,9 +7,9 @@ import { updateRecord, createRecord } from '../features/records/recordSlice';
 
 function RecordForm( {record, resetPopupOpen}: {record: RecordUpdateData | null, resetPopupOpen: Function})  {
   const dispatch = useAppDispatch();
-  const {message, isError} = useSelector((state: RootState) => state.records);
+  const {message} = useSelector((state: RootState) => state.records);
 
-  const [clientMessage, setClientMessage] = useState('')
+  const [clientMessage, setClientMessage] = useState(message ? message : '')
 
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -45,11 +45,6 @@ function RecordForm( {record, resetPopupOpen}: {record: RecordUpdateData | null,
         time
       }
       await dispatch(createRecord(bodyData))
-    }
-
-    if (isError) {
-      setClientMessage(message)
-      return
     }
 
     resetPopupOpen()

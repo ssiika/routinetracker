@@ -14,10 +14,11 @@ function TimeslotForm({resetPopupOpen}: {resetPopupOpen: Function}) {
     const [startMinutes, setStartMinutes] = useState('00')
     const [endHours, setEndHours] = useState('00')
     const [endMinutes, setEndMinutes] = useState('00')
+    const {userActivityList, message} = useSelector((state: RootState) => state.activities);
 
-    const [clientMessage, setClientMessage] = useState('')
+    const [clientMessage, setClientMessage] = useState(message ? message : '')
 
-    const {userActivityList, message, isError} = useSelector((state: RootState) => state.activities);
+
     
     const onSelectChange = (e: SyntheticEvent, fn: Function) => {
         e.preventDefault();
@@ -78,12 +79,7 @@ function TimeslotForm({resetPopupOpen}: {resetPopupOpen: Function}) {
 
         setClientMessage('')
         await dispatch(createTimeslot(bodyData));
-
-        if (isError) {
-            setClientMessage(message)
-            return
-        }
-        
+    
         resetPopupOpen()
     }
 

@@ -13,7 +13,7 @@ function Activities() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const {userActivityList, isLoading: activityLoading} = useSelector((state: RootState) => state.activities);
+  const {userActivityList, isLoading: activityLoading, isError} = useSelector((state: RootState) => state.activities);
   const {user, isLoading: userLoading} = useSelector((state: RootState) => state.auth);
 
   const [popupOpen, setPopupOpen] = useState(false)
@@ -33,6 +33,12 @@ function Activities() {
       dispatch(activityReset())
     }
   }, [user, dispatch, navigate])
+
+  useEffect(() => {
+    if(isError) {
+      setPopupOpen(true)
+    }
+  }, [isError])
 
   if (userLoading || activityLoading) {
     return <Spinner />

@@ -19,7 +19,7 @@ function Log() {
   const {user, isLoading: userLoading} = useSelector((state: RootState) => state.auth);
   const {userRecordList} = useSelector((state: RootState) => state.records)
   const {userActivityList, isLoading: activityLoading} = useSelector((state: RootState) => state.activities);
-  const { isLoading: recordLoading} = useSelector((state: RootState) => state.records);
+  const { isLoading: recordLoading, isError} = useSelector((state: RootState) => state.records);
 
   const [recordData, setRecordData] = useState<RecordUpdateData | null>(null);
   const [popupOpen, setPopupOpen] = useState(false)
@@ -46,6 +46,12 @@ function Log() {
       dispatch(activityReset())
     }
   }, [user, dispatch, navigate])
+
+  useEffect(() => {
+    if(isError) {
+      setPopupOpen(true)
+    }
+  }, [isError])
 
   if (userLoading || activityLoading || recordLoading) {
     return <Spinner />

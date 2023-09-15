@@ -82,10 +82,12 @@ export const recordSlice = createSlice({
         builder
             .addCase(createRecord.pending, (state) => {
                 state.isLoading = true;
+                state.isError = false;
             })
             .addCase(createRecord.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
+                state.isError = false;
                 state.message = '';
                 state.userRecordList.push(action.payload);
             })
@@ -95,11 +97,13 @@ export const recordSlice = createSlice({
                 state.message = action.payload as string;
             })
             .addCase(getRecords.pending, (state) => {
+                state.isError = false;
                 state.isLoading = true;
             })
             .addCase(getRecords.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
+                state.isError = false;
                 state.message = '';
                 state.userRecordList = action.payload;
             })
@@ -114,6 +118,7 @@ export const recordSlice = createSlice({
             .addCase(updateRecord.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
+                state.isError = false;
                 state.message = '';
                 state.userRecordList = state.userRecordList.map((record) => record._id === action.payload._id ? 
                 action.payload : 
@@ -130,6 +135,7 @@ export const recordSlice = createSlice({
             .addCase(deleteRecords.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
+                state.isError = false;
                 state.message = '';
                 state.userRecordList = action.payload;
             })

@@ -117,10 +117,12 @@ export const activitySlice = createSlice({
         builder
             .addCase(createActivity.pending, (state) => {
                 state.isLoading = true;
+                state.isError = false;
             })
             .addCase(createActivity.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
+                state.isError = false;
                 state.message = '';
                 state.userActivityList.push(action.payload);
             })
@@ -130,11 +132,13 @@ export const activitySlice = createSlice({
                 state.message = action.payload as string;
             })
             .addCase(getActivities.pending, (state) => {
+                state.isError = false;
                 state.isLoading = true;
             })
             .addCase(getActivities.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
+                state.isError = false;
                 state.message = '';
                 state.userActivityList = action.payload;
             })
@@ -149,6 +153,7 @@ export const activitySlice = createSlice({
             .addCase(updateActivity.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
+                state.isError = false;
                 state.message = '';
                 state.userActivityList = state.userActivityList.map((activity) => activity._id === action.payload._id ? 
                 action.payload : 
@@ -165,6 +170,7 @@ export const activitySlice = createSlice({
             .addCase(deleteActivity.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
+                state.isError = false;
                 state.message = '';
                 state.userActivityList = state.userActivityList.filter((activity) => activity._id !== action.payload._id)
             })
@@ -175,10 +181,12 @@ export const activitySlice = createSlice({
             })
             .addCase(createTimeslot.pending, (state) => {
                 state.isLoading = true;
+                state.isError = false;
             })
             .addCase(createTimeslot.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
+                state.isError = false;
                 state.message = '';
                 state.userActivityList = state.userActivityList.map((activity) => activity._id === action.payload._id ? 
                 action.payload : 
@@ -195,6 +203,7 @@ export const activitySlice = createSlice({
             .addCase(deleteTimeslot.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
+                state.isError = false;
                 state.message = '';
                 state.userActivityList = state.userActivityList.map((activity) => activity._id === action.payload._id ? 
                 action.payload : 

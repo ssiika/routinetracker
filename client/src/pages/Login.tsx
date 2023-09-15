@@ -7,6 +7,8 @@ import type { RootState } from '../app/store';
 import {login, reset} from '../features/auth/authSlice';
 import { useAppDispatch } from '../app/hooks';
 import Spinner  from '../components/Spinner';
+import { activityReset } from '../features/activities/activitySlice';
+import { recordReset } from '../features/records/recordSlice';
 
 
 function Login() {
@@ -30,6 +32,8 @@ function Login() {
     }
     
     dispatch(reset())
+    dispatch(activityReset())
+    dispatch(recordReset())
 
   }, [user, isSuccess, navigate, dispatch])
 

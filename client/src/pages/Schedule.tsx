@@ -15,7 +15,7 @@ function Schedule() {
   const navigate = useNavigate();
 
   const {user, isLoading: userLoading} = useSelector((state: RootState) => state.auth);
-  const {userActivityList, isLoading: activityLoading} = useSelector((state: RootState) => state.activities);
+  const {userActivityList, isLoading: activityLoading, isError} = useSelector((state: RootState) => state.activities);
 
   const [popupOpen, setPopupOpen] = useState(false)
 
@@ -37,6 +37,12 @@ function Schedule() {
       dispatch(activityReset())
     }
   }, [user, dispatch, navigate])
+
+  useEffect(() => {
+    if(isError) {
+      setPopupOpen(true)
+    }
+  }, [isError])
 
   if (userLoading || activityLoading) {
     return <Spinner />

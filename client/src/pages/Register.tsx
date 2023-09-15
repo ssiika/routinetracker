@@ -7,6 +7,8 @@ import type { RootState } from '../app/store.js';
 import  {register, reset} from '../features/auth/authSlice';
 import { useAppDispatch } from '../app/hooks';
 import Spinner from '../components/Spinner';
+import { activityReset } from '../features/activities/activitySlice';
+import { recordReset } from '../features/records/recordSlice';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -33,6 +35,8 @@ function Register() {
     }
 
     dispatch(reset())
+    dispatch(activityReset())
+    dispatch(recordReset())
 
   }, [user, isSuccess, navigate, dispatch])
 

@@ -4,11 +4,14 @@ import type { RootState } from '../app/store';
 import { createActivity } from '../features/activities/activitySlice';
 import { useAppDispatch } from '../app/hooks';
 
-function ActivityForm({resetPopupOpen}: {resetPopupOpen: Function}) {
+function ActivityForm(
+    {resetPopupOpen}: 
+    {resetPopupOpen: Function}
+  ) {
   const dispatch = useAppDispatch();
-  const {message, isError} = useSelector((state: RootState) => state.activities);
+  const {message} = useSelector((state: RootState) => state.activities);
 
-  const [clientMessage, setClientMessage] = useState('')
+  const [clientMessage, setClientMessage] = useState(message ? message : '')
 
   const colorList = [
     // dark brown 
@@ -53,13 +56,13 @@ function ActivityForm({resetPopupOpen}: {resetPopupOpen: Function}) {
     '70, 240, 240',
     // lavender
     '220, 190, 255'   
-]
+  ]
 
   const [formColor, setFormColor] = useState(colorList[0])
   const [isVisible, setIsVisible] = useState(false)
 
 
-  const onSubmit = async (e: SyntheticEvent) => {
+  const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
     const target = e.target as typeof e.target & {
@@ -78,16 +81,12 @@ function ActivityForm({resetPopupOpen}: {resetPopupOpen: Function}) {
     }
 
     setClientMessage('')
-    await dispatch(createActivity(bodyData));
 
-    if (isError) {
-      setClientMessage(message)
-      console.log(message)
-      return
-    }
+    dispatch(createActivity(bodyData));
 
     resetPopupOpen()
-}
+  }
+
 
   return (
     <div className="popupContainer">
