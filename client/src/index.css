@@ -898,3 +898,25 @@ tr:nth-child(2n) td {
   }
 }
 
+@media (max-height:860px) {
+  .container {
+    grid-template-rows: 130px auto;
+  }
+  .header {
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  .scheduleContent {
+    gap: 20px;
+  }
+}
+
+@media (max-height:825px) {
+  .scheduleContent {
+    gap: 10px;
+  }
+}
+
+
+
