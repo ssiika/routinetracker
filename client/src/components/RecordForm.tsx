@@ -38,10 +38,16 @@ function RecordForm( {record, resetPopupOpen}: {record: RecordUpdateData | null,
       
     } else if (record && !record.id) {
       // Record for this date does not exist, needs to be added
+      let day = record.day
+
+      if (typeof day === "string") {
+        // Day is in toLocaleDateString format
+        day = new Date(day)
+      }
 
       const bodyData = {
         activity_id: record.activity_id,
-        day: record.day,
+        day,
         time
       }
       await dispatch(createRecord(bodyData))

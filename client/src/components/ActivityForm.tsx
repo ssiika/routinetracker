@@ -76,7 +76,7 @@ function ActivityForm(
 
     const bodyData = {
       name: target.name.value,
-      start: new Date().toLocaleDateString(),
+      start: new Date(),
       color: formColor
     }
 

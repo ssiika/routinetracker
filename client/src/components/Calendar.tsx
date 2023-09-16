@@ -17,10 +17,10 @@ function Calendar({records, calendarClick, activityData}: {records: Record[], ca
     
     // calendarStart returns either a date 30 days ago, or if the activity was created within 30 days the date of creation
     var calendarStart: Date = new Date(today - Math.min((today - formattedStart), (24*60*60*1000) * 29))
-    var recentRecords = records.filter((record) => new Date(record.day).getTime() >= calendarStart.getTime())
+    calendarStart.setHours(0, 0, 0, 0)
+    var recentRecords = records.filter((record) =>  new Date(record.day).getTime() >= calendarStart.getTime())
     var largestTimeValue = Math.max(...recentRecords.map(x => x.time))
-    
-    
+
     // ISSUE: need to turn record.day into Date not string
   return ( 
         <div className="calendarBox">
