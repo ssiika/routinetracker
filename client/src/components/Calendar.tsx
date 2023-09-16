@@ -43,7 +43,6 @@ function Calendar({records, calendarClick, activityData}: {records: Record[], ca
                     // Record data is an object in a format ready to be sent to the update record form 
                     
                     let recordData;
-
                     for (let i = 0; i < recentRecords.length; i++) {
                         const date = new Date(recentRecords[i].day).toLocaleDateString()
                         if (date === start.toLocaleDateString()) {
@@ -52,7 +51,7 @@ function Calendar({records, calendarClick, activityData}: {records: Record[], ca
                                 id: foundRecord[0]._id,
                                 activity_id: activityData._id,
                                 activity_name: activityData.name,
-                                day: start.toLocaleDateString()
+                                day: new Date(start)
                             }
                             calendarArray.push(
                                 <CalendarNode  
@@ -71,7 +70,7 @@ function Calendar({records, calendarClick, activityData}: {records: Record[], ca
                         recordData = {
                             activity_id: activityData._id,
                             activity_name: activityData.name,
-                            day: start.toLocaleDateString()
+                            day: new Date(start)
                         }
                         calendarArray.push(
                             <CalendarNode 

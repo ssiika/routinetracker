@@ -21,10 +21,18 @@ function CalendarNode({recordData, time, max, calendarClick, color}: {
   const nodeFilterStyle = {
     backgroundColor: `rgb(${color}, ${time / max})`
   }
+
+  if (recordData.day instanceof Date) {
+    
+  }
   
+
   return (
     <div style={nodeFilterStyle} onMouseEnter={onHover} onMouseLeave={onLeave} onClick={() => calendarClick(recordData)} className="calendarNode">
-      <span className={hover ? "calendarHover" : ""}>{hover ? `${time} minutes on ${recordData.day}` : ''}</span>
+      <span className={hover ? "calendarHover" : ""}>
+        {hover ? `${time} minutes on 
+        ${(recordData.day instanceof Date) ? recordData.day.toLocaleDateString() : recordData.day}` : ''}
+      </span>
     </div> 
   )
 }

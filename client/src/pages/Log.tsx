@@ -66,7 +66,9 @@ function Log() {
         <Sidebar />
         <div className='content'>
           <div className='logDesc'>
-            {recordData ? `${recordData.activity_name} on ${recordData.day}` : 'Click on a day to add a record'}
+            {recordData ? `${recordData.activity_name} on 
+            ${(recordData.day instanceof Date) ? recordData.day.toLocaleDateString() : recordData.day}` : 
+            'Click on a day to add a record'}
           </div>
           <button 
             className={recordData ? 'addBtn' : 'addBtn disabled'}

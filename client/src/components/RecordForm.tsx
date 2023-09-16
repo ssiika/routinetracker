@@ -62,7 +62,9 @@ function RecordForm( {record, resetPopupOpen}: {record: RecordUpdateData | null,
       <div className="popupContainer">
         <div className="recordFormBox">
           <div className='recordDesc'>
-            {record ? `Minutes spent on ${record.activity_name} on ${record.day}:` : 'Click on a day to add a record'}
+            {record ? `Minutes spent on ${record.activity_name} on 
+            ${(record.day instanceof Date) ? record.day.toLocaleDateString() : record.day}:` :
+             'Click on a day to add a record'}
           </div>
           <form className="recordForm" onSubmit={onSubmit}>
             <input type="text"
