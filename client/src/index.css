@@ -815,7 +815,7 @@ tr:nth-child(2n) td {
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(5, auto);
-  gap: 10px;
+  row-gap: 10px;
   width: 1100px;
 }
 
@@ -824,6 +824,7 @@ tr:nth-child(2n) td {
   gap: 5px;
   grid-template-columns: auto auto;
   align-items: center;
+  margin-right: 10px;
 }
 
 .filterBox {
