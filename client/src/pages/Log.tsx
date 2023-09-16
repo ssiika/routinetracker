@@ -64,7 +64,7 @@ function Log() {
   return (
     <>
         <Sidebar />
-        <div className='content'>
+        <div className='content logContent'>
           <div className='logDesc'>
             {recordData ? `${recordData.activity_name} on 
             ${(recordData.day instanceof Date) ? recordData.day.toLocaleDateString() : recordData.day}` : 

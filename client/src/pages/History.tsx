@@ -185,7 +185,6 @@ function History() {
               <option value="avg">Daily Avg</option>
             </select>
           </div>        
-          <div className="graph">
             {recordData ? (
               <>
                 {(function () {
@@ -223,7 +222,6 @@ function History() {
               </>
               )
             }
-          </div>
         </div>
     </>
   )
