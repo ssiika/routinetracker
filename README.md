@@ -1,7 +1,7 @@
 # Routine Tracker
 
 Routine tracker makes it easy to keep track of routines and habits, allowing users to create schedules, input the time spent on activities in a given day and view historical data. 
-The app is flexible, and you can pick and choose which features are applicable to your needs.
+The app is flexible as you can pick and choose which features are applicable to your needs.
 
 A live version of the app can be tested here:
 
@@ -21,7 +21,7 @@ Here you can create activities which will be used throughout the website. Users 
 
 ### Schedule
 
-This page helps users keep track of activities done on a regular schedule. It does not necessarily have to be used in tandem with the log/history features if the user
+This page helps users keep track of activities done on a regular basis. It does not have to be used in tandem with the log/history features if the user
 desires. Timeslots are added to an overlay which sits on top of the schedule table. Users can hover over them for more info, or to delete them.
 
 ![image](https://github.com/ssiika/routinetracker/assets/102464026/ba500e90-ae5c-4444-821c-d2a8f760ca42)
