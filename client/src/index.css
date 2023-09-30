@@ -1,0 +1,923 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 300px calc(100vw - 300px);
+  grid-template-rows: 170px auto;
+  
+}
+
+.sidebar {
+  height: calc(100vh - 170px);
+  width: 300px;
+  min-width: 200px;
+  height: 100vh;
+  position: fixed;
+  border-right: 1px solid rgb(185, 185, 185);
+  box-shadow: 2px 2px rgb(240, 240, 240);
+  background-color: white;
+  box-sizing: border-box;
+  display: grid;
+  align-content: start;
+  justify-content: end;
+  gap: 10px;
+  padding-top: 170px;
+  overflow: auto;
+  z-index: 1;
+}
+
+
+.sidebar li {
+  display: grid;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+.sidebarLink {
+  height: 45px;
+  padding: 10px 5px 10px 10px;
+  width: calc(100% - 100px);
+  min-width: 150px;
+  justify-self: end;
+  box-sizing: border-box;
+  display: block;
+}
+
+.noActivitiesMsg {
+  justify-self: center;
+  width: 500px;
+  text-align: center;
+}
+
+.inlineLink {
+  font-weight: 500;
+  color: rgb(87, 87, 255);
+}
+
+.sidebarSelected {
+  background-color: #dfdede;
+}
+
+.form {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.loginHeader, .registerHeader {
+  font-weight: 500;
+  font-size: 40px;
+}
+
+.loginForm {
+  display: grid;
+  grid-template-rows: auto auto 40px auto;
+  grid-template-columns: 700px;
+  justify-content: center;
+}
+
+.loginForm input {
+  outline: none;
+}
+
+.registerForm {
+  display: grid;
+  grid-template-rows: auto auto auto 40px auto;
+  grid-template-columns: 700px;
+  justify-content: center;
+}
+
+.loginBtn, .registerBtn {
+  padding: 10px 20px;
+  border: 1px solid #000;
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  width: 200px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  appearance: button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition-property: border-radius, transform;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.loginBtn:hover, .registerBtn:hover {
+  background-color: #696969;
+}
+
+.loadingSpinnerContainer, .popupContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  width: 50px;
+	height: 50px;
+	margin: 110px auto 0;
+	border:solid 5px #afafaf;
+	border-radius: 50%;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+.loadingSpinner2 {
+  width: 25px;
+	height: 25px;
+  margin: 10px;
+	border:solid 3px #afafaf;
+	border-radius: 50%;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.header {
+  grid-area: 1 / 1 / 2 / 3;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(185, 185, 185);
+  box-sizing: border-box;
+  z-index: 2;
+  width: 100vw;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  padding-bottom: 30px;
+  padding-top: 20px;
+  background-color: white;
+  position: fixed;
+}
+
+.logo {
+  justify-self: left;
+}
+
+
+.activityHeader {
+  font-size: 25px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.logo a {
+  font-size: 50px;
+  font-family: 'Garamond';
+}
+
+ul {
+  list-style-type: none;
+}
+
+.userInfo {
+  grid-template-columns: auto auto;
+  gap: 40px;
+  font-size: 15px;
+  display: grid;
+  align-items: center;
+  justify-self: end;
+}
+
+.registerbox {
+  font-weight: bold;
+  height: 50px;
+  width: 100px;
+  padding: 10px 10px;
+  box-sizing: border-box;
+  background-color: lightgreen;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  border-radius: 5px;
+  border: 1px solid rgb(92, 230, 92);
+}
+
+.registerbox:hover {
+  cursor: pointer;
+  background-color: rgb(92, 230, 92);
+}
+
+.logout {
+  background: none;
+  border: none;
+  font-size: 15px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 5px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding: 0 20px;
+  display: grid;
+  justify-items: center;
+}
+
+h1 {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
+  align-items: center;
+}
+
+.heading p {
+  color: #828282;
+}
+
+.topbox {
+  display: grid;
+  grid-template-columns: 650px 650px;
+  justify-self: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+  display: grid;
+  justify-items: center;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 700px;
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-family: inherit;
+}
+
+.form-group label {
+  text-align: left;
+  display: block;
+  margin: 0 0 5px 3px;
+}
+
+.content {
+  width: 1300px; 
+  box-sizing: border-box;
+  padding-left: 150px;
+  display: grid;
+  gap: 50px;
+  grid-area: -2 / -2 / -1 / -1;
+}
+
+.scheduleContent {
+  gap: 30px;
+  width: 1250px;
+  justify-content: center;
+}
+
+.guideContent {
+  gap: 20px;
+  padding-bottom: 100px;
+}
+
+.logContent {
+  justify-content: center;
+}
+
+.loginContent, .registerContent {
+  display: grid;
+  width: 800px; 
+  box-sizing: border-box;
+  justify-self: center;
+  gap: 20px;
+  grid-area: 2 / 1 / 3 / 3;
+}
+
+h2, h3 {
+  border-bottom: 1px solid darkgray;
+  padding-bottom: 10px;
+}
+
+
+.logDesc {
+  justify-self: center;
+  font-size: 18px;
+  padding-top: 15px;
+}
+
+.log-activities {
+  display: grid;
+  grid-template-columns: repeat(4, 250px);
+  row-gap: 20px;
+  column-gap: 50px;
+  padding-top: 10px;
+  grid-auto-flow: row;
+  justify-items: center;
+}
+
+.activityHeader {
+  font-family: Roboto sans-serif;
+}
+
+.activitybox {
+  border-radius: 3px;
+  height: 250px;
+  width: 250px;
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: 2px 2px lightgray;
+  display: grid;
+  gap: 20px;
+  justify-items: center;
+}
+
+.activityList {
+  display: grid;
+  gap: 10px;
+  justify-content: center;
+  grid-template-rows: repeat(5, auto);
+  grid-auto-flow: column;
+}
+
+.activityPageBox {
+  border: 2px solid lightgray;
+  border-radius: 2px;
+  display: grid;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 300px;
+  gap: 5px;
+  grid-template-columns: 180px auto auto;
+}
+
+.activityPageBox .colorBox, .activityForm .colorBox {
+  margin-left: auto;
+}
+
+.activityPageBox > .activityDelete {
+  width: 60px;
+  justify-self: end;
+}
+
+.timeslotFormBox {
+  display: grid;
+  justify-items: center;
+  justify-self: center;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 4px 4px lightgray;
+  box-sizing: border-box;
+  height: 350px;
+  width: 400px;
+  padding: 25px;
+}
+
+.timeslotFormBox > .errorbox {
+  height: 30px;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.timeslotForm {
+  display: grid;
+  justify-content: center;
+  width: 100%;
+  row-gap: 10px;
+  grid-template-rows: repeat(5, auto);
+  grid-template-columns: repeat(3, 75px);
+}
+
+.timeslotForm > .submitBtn {
+  grid-area: 5 / 1 / 6 / 4;
+  width: 60px;
+  justify-self: center;
+  font-size: 15px;
+}
+
+.timeslotForm > #daySelect {
+  grid-area: 3 / 2 / 4 / 4;
+}
+
+.timeslotForm > #activitySelect {
+  grid-area: 4 / 1 / 5 / 4;
+}
+
+
+.timeslotForm > select {
+  padding: 3px;
+}
+
+
+.activityFormBox {
+  display: grid;
+  grid-template-rows: auto auto 30px auto;
+  justify-items: center;
+  justify-self: center;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 4px 4px lightgray;
+  height: 180px;
+  width: 350px;
+  padding: 20px;
+}
+
+.activityFormHeader, .timeslotFormHeader {
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.activityForm {
+  border: 2px solid lightgray;
+  box-shadow: 2px 2px lightgray;
+  border-radius: 2px;
+  display: grid;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 300px;
+  gap: 5px;
+  grid-template-columns: 180px auto auto;
+  height: 45px;
+}
+
+.activityForm > button {
+  width: 60px;
+}
+
+.activityForm > input {
+  border: none;
+}
+
+.activityForm > input:focus {
+  outline: none;
+}
+
+.recordFormBox {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 4px 4px lightgray;
+  height: 180px;
+  width: 350px;
+  padding: 20px;
+  grid-template-rows: auto auto 35px auto;
+}
+
+.recordForm {
+  border: 2px solid lightgray;
+  height: 45px;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+.recordForm > input {
+  border: none;
+}
+
+.recordForm > input:focus {
+  outline: none;
+}
+
+.recordDesc {
+  width: 275px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.calendarBox {
+  width: 200px;
+  height: 150px;
+  display: grid;
+  grid-template-columns: repeat(7, 25px);
+  grid-template-rows: repeat(5, 25px);
+  justify-content: center;
+  gap: 1px;
+}
+
+.calendarNode {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  border: 1px solid rgb(105, 105, 105);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.calendarHover {
+  position: absolute;
+  top: -40px;
+  left: -98px;
+  width: 220px;
+  background-color: rgb(85, 84, 84);
+  color: white;
+  padding: 5px;
+  text-align: center;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.calendarHover:after {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-top-color: rgb(85, 84, 84);
+	border-width: 5px;
+	margin-left: -5px;
+}
+
+.timeslotHover {
+  position: absolute;
+  top: -40px;
+  left: -35px;
+  width: 220px;
+  background-color: rgb(85, 84, 84);
+  color: white;
+  padding: 5px;
+  text-align: center;
+  border-radius: 2px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+
+.timeslotHover:after {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-top-color: rgb(85, 84, 84);
+	border-width: 5px;
+	margin-left: -5px;
+}
+
+.userIcon {
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+  background-color: #d3d3d3;
+  position: relative;
+  cursor: pointer;
+}
+
+.userIconSymbol {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  padding-top: 5px;
+}
+
+.dropdown {
+  list-style-type: none;
+  display: none;
+  height: 65px;
+  position: absolute;
+  box-sizing: border-box;
+  padding: 20px;
+  border: 2px solid rgb(136, 136, 136);
+  border-radius: 3px;
+  box-shadow: 3px 3px lightgray;
+  top: 45px;
+  right: 10px;
+  background-color: white;
+  z-index: 1;
+}
+
+.dropdown  li {
+  display: block;
+}
+
+.colorBox {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  border: 1px solid rgb(172, 172, 172);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.colorDropdown {
+  display: none;
+  grid-template-columns: repeat(7, 20px);
+  grid-template-rows: repeat(3, 20px);
+  gap: 1px;
+  padding: 2px;
+  box-sizing: border-box;
+  border: 2px solid rgb(109, 109, 109);
+  border-radius: 2px;
+  box-shadow: 3px 3px lightgray;
+  background-color: white;
+  position: absolute;
+  left: 25px;
+}
+
+.activityDelete {
+  background-color: lightcoral;
+  border: 2px solid rgb(187, 97, 97);
+  border-radius: 2px;
+  color: white;
+}
+
+.deleteHover {
+  background-color: rgb(187, 97, 97);
+}
+
+
+
+.submitBtn, .addBtn {
+  background-color: lightgreen;
+  border: 2px solid rgb(120, 199, 120);
+  border-radius: 2px;
+  color: white;
+}
+
+.submitBtn:hover, .addBtn:hover {
+  background-color: rgb(120, 199, 120);
+}
+
+.addBtn {
+  width: 150px;
+  font-size: 15px;
+  justify-self: center;
+}
+
+.addBtn:disabled, 
+.addBtn[disabled] {
+  background-color: lightgray;
+  border: 2px solid #828282;
+  cursor: auto;
+}
+
+.deleteBox {
+  height: 150px;
+  width: 350px;
+  background-color: white;
+  border-radius: 5px;
+  border: 3px solid black;
+  display: grid;
+  grid-template-columns: repeat(2, 150px);
+  grid-template-rows: auto 50px;
+  justify-items: center;
+  justify-content: center;
+  font-size: 20px;
+  padding: 50px 10px 20px 10px;
+}
+
+.deleteBox button {
+  height: 30px;
+}
+
+
+.deleteText {
+  grid-area: 1 / 1 / 2 / 3;
+  text-align: center;
+}
+
+.popupCancel {
+  background: none;
+  border: none;
+  font-weight: bold;
+}
+
+.popupCancel:hover {
+  cursor: pointer;
+}
+
+.schedule {
+  display: grid; 
+  width: 1100px;
+  grid-template-columns: 50px repeat(auto-fill, 150px);
+  grid-template-rows: auto;
+  grid-auto-flow: row;
+  position: relative;
+}
+
+.dayTable {
+  width: 150px;
+  text-align: center;
+  border-spacing: 0;
+  border: 2px solid rgb(90, 90, 90);
+  border-right: 0;
+  box-sizing: border-box;
+}
+
+.day {
+  text-align: center;
+}
+
+.dayBox:last-child .dayTable{
+  border-right: 2px solid rgb(90, 90, 90);
+  width: 152px;
+}
+
+.timeslot {
+  height: 8px;
+  border: 1px solid rgb(230, 230, 230);
+}
+
+tr:nth-child(2n) td {
+  border-bottom: 1px solid rgb(168, 168, 168);
+}
+
+.timeLegend {
+  height: 580px;
+  width: 50px;
+}
+
+.timeLegendBox {
+  height: 72px;
+  position: relative;
+  top: -10px;
+}
+
+.overlay {
+  position: absolute;
+  height: 100%;
+  width: calc(100% - 100px);
+  left: 50px;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.timeslotBox {
+  width: 148px;
+  box-sizing: border-box;
+  position: absolute;
+}
+
+.close {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  right: 3px;
+  cursor: pointer;
+  border: none;
+  font-size: 10px;
+  color: white;
+  font-weight: bold;
+  background: none;
+  display: none;
+}
+
+.activityLegend {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(5, auto);
+  row-gap: 10px;
+  width: 1100px;
+}
+
+.legendBox {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: auto auto;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.filterBox {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto 100px 100px;
+  width: 1150px;
+}
+
+.graphFilter:nth-child(2) {
+  margin-left: auto;
+}
+
+.graphFilter  {
+  background-color: rgb(252, 247, 241);
+  border: none;
+  padding: 8px 10px;
+  border-radius: 2px;
+  width: 200px;
+  font-size: 15px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.formSelect {
+  background-color: rgb(252, 247, 241);
+  border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.smallFilter {
+  width: 100px;
+}
+
+.graphDiv {
+  width: 1150px;
+}
+
+.errorbox {
+  color: red;
+  font-size: 15px;
+}
+
+.visible {
+  display: grid;
+}
+
+@media (max-width:1650px) {
+  .sidebar {
+    width: 200px;
+  }
+  .container {
+    grid-template-columns: 200px calc(100vw - 200px);
+  }
+  .content {
+    padding-left: 50px;
+  }
+
+}
+
+@media (max-width:1550px) {
+  .content {
+    width: 1150px;
+  }
+  .filterBox, .graphDiv {
+    width: 1100px;
+  }
+  
+  .log-activities {
+    column-gap: 30px;
+  }
+}
+
+@media (max-height:860px) {
+  .container {
+    grid-template-rows: 130px auto;
+  }
+  .header {
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  .scheduleContent {
+    gap: 20px;
+  }
+}
+
+@media (max-height:825px) {
+  .scheduleContent {
+    gap: 10px;
+  }
+}
+
+
+

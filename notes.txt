@@ -1,0 +1,13 @@
+Website pages 
+
+    Log 
+        Allows user to log time spent
+        contains dates separated by activity
+        Show last month of history
+        
+    Schedule
+        Shows weekly view of timeslots
+        Allows user to add/remove activities and timeslots
+
+    History
+        shows actual input vs expected in graph
